@@ -6,8 +6,6 @@ as well as how they're changed.
 
 """
 
-from ExternalBehaviour import ExternalBehaviour
-
 class InternalBehaviour:
 
     """
