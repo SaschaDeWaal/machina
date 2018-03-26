@@ -74,3 +74,6 @@ class InternalBehaviour:
                 self._contJeal = 10
             elif self._contJeal < 0:
                 self._contJeal = 0
+
+
+
