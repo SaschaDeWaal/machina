@@ -26,3 +26,5 @@ class InternalBehaviour:
         self._boredExciThres = 5.5
 
         # Fearfulness versus Relaxedness
+
+
