@@ -13,20 +13,11 @@ found in InternalBehaviour.
 
 class ExternalBehaviour:
 
-<<<<<<< HEAD
 
-    def __init__(self, leftMotor, rightMotor):
-        self._motorLeft = leftMotor
-        self._motorRight = rightMotor
-        _motor.setDirection(1)
-
-
-
-=======
     def __init__(self, motorLeft, motorRight):
         self._motorLeft = motorLeft
         self._motorRight = motorRight
         #_motorA.setDirection(1)
         InternalBehaviour._funFrust = 5 #test
->>>>>>> 207b2219f4f537cc4532c3a2ce63822b51c29d97
+
 
