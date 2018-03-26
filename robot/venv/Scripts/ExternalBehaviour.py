@@ -10,10 +10,6 @@ class ExternalBehaviour:
         self._motorRight = rightMotor
         _motor.setDirection(1)
 
-    def __init__(self, motorLeft, motorRight):
-        self._motorLeft = motorLeft
-        self._motorRight = motorRight
-        #_motorA.setDirection(1)
 
 
 
