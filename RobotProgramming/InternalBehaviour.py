@@ -25,11 +25,6 @@ class InternalBehaviour:
         self._boredExci = 5
         self._boredExciThres = 5.5
 
-<<<<<<< HEAD
-        # Fearfulness versus Relaxedness
-
-
-=======
         # Fearfulness versus Calmness
         self._fearCalm = 5
         self._fearCalmThres = 5.5
@@ -37,4 +32,4 @@ class InternalBehaviour:
         # Contendedness versus Jealousy
         self._contJeal = 5
         self._contJealThres = 5.5
->>>>>>> 3a8f712acaba4ea7a3b2bc2d2d3865a6ac962dfc
+
