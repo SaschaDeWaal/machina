@@ -13,6 +13,11 @@ class InternalBehaviour:
     These parameters are used in order to determine the various aspects of the robot's emotional state.
     The parameters should range from 0 to 10, and are accompanied by a separate threshold value that indicates
     when the 'switch' between the positive and negative end of the emotion should occur.
+
+    It also sets values for the 'wishes' parameters. These are to be multiplied by sensor output in order to determine
+    the effect that certain interactions by the users have on the robot. Wishes can be positive and negative, to allow
+    a like or dislike for some particular action. They're supposed to have a value between -2 and 2 to indicate for
+    both a high and mild (dis)like.
     """
     def __init__(self):
         # Fun versus Frustration
@@ -30,6 +35,13 @@ class InternalBehaviour:
         # Contendedness versus Jealousy
         self._contJeal = 5
         self._contJealThres = 5.5
+
+
+        # Wish parameters. Can be added/removed/changed as necessary.
+        self._touchiness = 0 # how robot reacts to being touched
+        self.lightPreference = 0 # how much the robot likes to be in bright places
+        self.noisiness = 0 # whether robot likes/dislikes noisy areas.
+
 
     """
     This function is used to provide the name of one of the parameters, and an accompanied value.
