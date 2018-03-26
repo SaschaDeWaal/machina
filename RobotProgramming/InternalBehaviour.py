@@ -33,11 +33,6 @@ class InternalBehaviour:
         self._contJeal = 5
         self._contJealThres = 5.5
 
-<<<<<<< HEAD
-
-
-
-=======
     """
     This function is used to provide the name of one of the parameters, and an accompanied value.
     The parameter corresponding to the supplied name is then changed by the value. After this, a function is called
@@ -79,7 +74,7 @@ class InternalBehaviour:
                 self._contJeal = 10
             elif self._contJeal < 0:
                 self._contJeal = 0
->>>>>>> 9fe9f490a10bf97578db3428d24ee06aa4d22241
+
 
 
 
