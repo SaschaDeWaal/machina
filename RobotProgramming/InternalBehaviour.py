@@ -69,7 +69,7 @@ class InternalBehaviour:
                 self._fearCalm = 10
             elif self._fearCalm < 0:
                 self._fearCalm = 0
-        elif paramName == "contend":
+        elif paramName == "content":
             if self._contJeal > 10:
                 self._contJeal = 10
             elif self._contJeal < 0:
