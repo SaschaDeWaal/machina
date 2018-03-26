@@ -6,7 +6,7 @@ as well as how they're changed.
 
 """
 
-import ExternalBehaviour
+from ExternalBehaviour import ExternalBehaviour
 
 class InternalBehaviour:
 
