@@ -27,8 +27,13 @@
       <file leaf-file-name="InternalBehaviour.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/InternalBehaviour.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="725">
               <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+=======
+            <state relative-caret-position="461">
+              <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+>>>>>>> 3a8f712acaba4ea7a3b2bc2d2d3865a6ac962dfc
               <folding />
             </state>
           </provider>
@@ -339,8 +344,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/InternalBehaviour.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="325">
           <caret line="13" column="33" lean-forward="true" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+=======
+        <state relative-caret-position="461">
+          <caret line="14" column="25" lean-forward="true" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+>>>>>>> 3a8f712acaba4ea7a3b2bc2d2d3865a6ac962dfc
           <folding />
         </state>
       </provider>
