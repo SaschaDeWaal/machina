@@ -33,3 +33,9 @@ class InternalBehaviour:
         self._contJeal = 5
         self._contJealThres = 5.5
 
+
+
+
+
+
+
