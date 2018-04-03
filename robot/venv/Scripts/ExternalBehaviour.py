@@ -20,4 +20,12 @@ class ExternalBehaviour:
         #_motorA.setDirection(1)
         InternalBehaviour._funFrust = 5 #test
 
-
+    """
+    Function that takes the supposed directions and speeds for both motors to change.
+    -1: backward motion, 0 no motion, 1 forward motion
+    """
+    def MotorBehaviour(self, directionLeft, directionRight, speedLeft, speedRight):
+        DriveMotor.setDirection(self._motorLeft, directionLeft)
+        DriveMotor.setDirection(self._motorRight, directionRight)
+        DriveMotor.setSpeed(self._motorLeft, speedLeft)
+        DriveMotor.setSpeed(self._motorRight, speedRight)
