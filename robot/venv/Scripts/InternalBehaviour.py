@@ -43,7 +43,6 @@ class InternalBehaviour:
         self._touchPreference = 0 # how robot reacts to being touched
         self.touchBorder = 0.5    # amount of touch needed for robot to start disliking it.
         self._lightPreference = 0 # how much the robot likes to be in bright places
-        self._noisePreference = 0 # whether robot likes/dislikes noisy areas.
 
         self._isBeingPetted = False     # Whether robot is being petted, depends on light sensor input
         self._isInDarkness = False      # Whether robot currently is in a dark area
@@ -61,12 +60,6 @@ class InternalBehaviour:
     """
     def LightEffect(self, lightInput):
         self._fearCalm += lightInput * self._lightPreference
-
-    """
-    Function that take in the sensor output from light detector and changes the appropriate values depending on noisePreference
-    """
-    def SoundEffect(self, audioInput):
-        self._fearCalm += audioInput * self._noisePreference
 
     """
     Function that take in the sensor output from light detector,
