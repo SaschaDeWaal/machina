@@ -51,7 +51,7 @@ class InternalBehaviour:
                                         # and speed increase in the gyroscope
         self._hasCollided = False       # Whether robot has collided with something, noted by a sudden acceleration
                                         # and speed decrease in the gyroscope
-
+        self._gyroscope = [0,0,0,0,0,0] # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
 
 
 
