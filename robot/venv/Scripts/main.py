@@ -17,10 +17,10 @@ for dir in range(-1, 2):
     leftMotor.setDirection(dir)
     rightMotor.setDirection(dir)
     for i in range(10, 30):
-        leftMotor.setSpeed(i * 1000)
-        rightMotor.setSpeed(i * 1000)
-        print('speed: ' + str(i * 1000))
-        networkManager.sendMessage(str(i * 1000) + ' dir: ' + str(dir))
+        leftMotor.setSpeed(i * 3000)
+        rightMotor.setSpeed(i * 3000)
+        print('speed: ' + str(i * 3000))
+        networkManager.sendMessage(str(i * 3000) + ' dir: ' + str(dir))
         time.sleep(1)
 
 
