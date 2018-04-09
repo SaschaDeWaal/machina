@@ -34,6 +34,25 @@ class ExternalBehaviour:
         DriveMotor.setSpeed(self._motorLeft, speedLeft)
         DriveMotor.setSpeed(self._motorRight, speedRight)
 
+
+    """
+
+    """
+    def RandomMove(self):
+        randNum = random.randint(0, 2)
+        curTime = time.time()
+        duration = random.randrange(1, 3, 0.25)
+        stopTime = curTime + duration
+        if randNum == 0:
+            self.TimeDriveForward(stopTime)
+        elif randNum == 1:
+            self.TimeDriveBackward(stopTime)
+        elif randNum == 2:
+            degreesToTurnTo = random.randrange(0, 359, 1)
+            self.TurnDegrees(degreesToTurnTo)
+            
+
+
     """
     Drives both motors forward for a given time
     This is done by checking the time at which this function is supposed to stop
@@ -44,12 +63,17 @@ class ExternalBehaviour:
     """
     def TimeDriveForward(self, stoptime):
         #stoptime = timeStarted + datetime.timedelta(seconds=duration)
-        if stoptime < datetime.datetime.now():
+        #if stoptime < datetime.datetime.now():
+        if stoptime < time.time():
             self.MotorBehaviour(0, 0, 0, 0)
-            return True
-        elif stoptime > datetime.datetime.now():
+        #elif stoptime > datetime.datetime.now():
+        elif stoptime > time.time():
             self.MotorBehaviour(1, 1, 1000, 1000)
-            return False
+            #while stoptime > datetime.datetime.now():
+            while stoptime > time.time():
+                #if stoptime < datetime.datetime.now():
+                if stoptime < time.time():
+                    self.MotorBehaviour(0, 0, 0, 0)
 
     """
     Drives both motors backward for a given time
@@ -57,12 +81,17 @@ class ExternalBehaviour:
     """
     def TimeDriveBackward(self, stoptime):
         # stoptime = timeStarted + datetime.timedelta(seconds=duration)
-        if stoptime < datetime.datetime.now():
+        #if stoptime < datetime.datetime.now():
+        if stoptime < time.time():
             self.MotorBehaviour(0, 0, 0, 0)
-            return True
-        elif stoptime > datetime.datetime.now():
-            self.MotorBehaviour(-1, -1, 750, 750)
-            return False
+        #elif stoptime > datetime.datetime.now():
+        elif stoptime > time.time():
+            self.MotorBehaviour(-1, -1, 1000, 1000)
+            # while stoptime > datetime.datetime.now():
+            while stoptime > time.time():
+                # if stoptime < datetime.datetime.now():
+                if stoptime < time.time():
+                    self.MotorBehaviour(0, 0, 0, 0)
 
     """
     Function that aligns the robot to a given amount of angles.
@@ -74,5 +103,11 @@ class ExternalBehaviour:
             self.MotorBehaviour(0, 0, 0, 0)
         elif futureDegreesTurned < self._degreesTurned:
             self.MotorBehaviour(-1, 1, 100, 100)
+            while futureDegreesTurned < self._degreesTurned:
+                if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
+                    self.MotorBehaviour(0, 0, 0, 0)
         elif futureDegreesTurned > self._degreesTurned:
             self.MotorBehaviour(1, -1, 100, 100)
+            while futureDegreesTurned > self._degreesTurned:
+                if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
+                    self.MotorBehaviour(0, 0, 0, 0)
