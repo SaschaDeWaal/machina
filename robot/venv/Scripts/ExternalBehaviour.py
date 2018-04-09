@@ -18,6 +18,9 @@ class ExternalBehaviour:
     def __init__(self, motorLeft, motorRight):
         self._motorLeft = motorLeft
         self._motorRight = motorRight
+        self._degreesTurned = 0         # The amount of degrees the robot is turned, from 0 to 360.
+                                        # It should be ensured this is relative to the gyroscope input
+                                        # e.g. 'north' should be equal to 0 degrees.
         #_motorA.setDirection(1)
         InternalBehaviour._funFrust = 5 #test
 
@@ -61,4 +64,15 @@ class ExternalBehaviour:
             self.MotorBehaviour(-1, -1, 750, 750)
             return False
 
-
+    """
+    Function that aligns the robot to a given amount of angles.
+    This is accomplished by rotating it in the corresponding direction until the robot's alignment is within
+    a margin of 6 degrees: 3 below and 3 above the supposed alignment.
+    """
+    def TurnDegrees(self, futureDegreesTurned):
+        if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
+            self.MotorBehaviour(0, 0, 0, 0)
+        elif futureDegreesTurned < self._degreesTurned:
+            self.MotorBehaviour(-1, 1, 100, 100)
+        elif futureDegreesTurned > self._degreesTurned:
+            self.MotorBehaviour(1, -1, 100, 100)
