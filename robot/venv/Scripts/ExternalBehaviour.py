@@ -4,6 +4,7 @@ import time
 import Sensor
 import random
 import datetime
+
 """
 
 File/class that's supposed to be used to the apparent behaviour of the robot.
@@ -34,9 +35,9 @@ class ExternalBehaviour:
         DriveMotor.setSpeed(self._motorLeft, speedLeft)
         DriveMotor.setSpeed(self._motorRight, speedRight)
 
-
     """
-
+    Performs either move forward for a random amount of seconds between 1 and 3, backward, or turns to a
+    random alignment, all with a chance of 1 in 3.
     """
     def RandomMove(self):
         randNum = random.randint(0, 2)
@@ -50,8 +51,6 @@ class ExternalBehaviour:
         elif randNum == 2:
             degreesToTurnTo = random.randrange(0, 359, 1)
             self.TurnDegrees(degreesToTurnTo)
-            
-
 
     """
     Drives both motors forward for a given time
