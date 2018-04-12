@@ -2,6 +2,7 @@ import sys
 
 from Objects.DriveMotor import DriveMotor
 from Objects.SensorBridge import SensorBridge
+from Objects.Camera import Camera
 #import ExternalBehaviour
 
 #create motors
@@ -11,13 +12,15 @@ rightMotor = DriveMotor(36, 38)
 #exBeh = ExternalBehaviour.ExternalBehaviour(leftMotor, rightMotor)
 
 sensorBridge = SensorBridge()
+camera = Camera()
 
 #wait until exit
 while raw_input('Exit? (y): ') != 'y':
-    print "msg index: " + sensorBridge.lastData['index']
+    print ""
 
-
-sensorBridge.stop()
+#stop all
+#sensorBridge.stop()
+camera.stop()
 sys.exit()
 
 
