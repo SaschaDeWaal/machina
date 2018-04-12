@@ -12,11 +12,11 @@ This is for easier storage and usage by other files.
 """
 
 class Sensor:
-
-    def main(self):
-        print("hi")
-        self.func2()
-        self.func3()
+    def __init__(self):
+        print"hi"
+        self.func1()
+        #self.func2()
+        #self.func3()
 
 
     def func1(self):
@@ -30,8 +30,8 @@ class Sensor:
             if frame != None:
                 cv2.imshow("test", frame)
 
-                # if not ret:
-                # break
+                if not ret:
+                    break
             k = cv2.waitKey(1)
 
             if k % 256 == 27:
@@ -69,3 +69,6 @@ class Sensor:
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 cv2.destroyAllWindows()
                 break
+
+if __name__ == '__main__':
+    derp = Sensor()
