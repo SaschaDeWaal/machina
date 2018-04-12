@@ -1,16 +1,19 @@
 import time
 import thread
-from NetworkManager import NetworkManager;
+from NetworkManager import NetworkManager
 from DriveMotor import DriveMotor
+import ExternalBehaviour
 
 def startNetwork():
-    networkManager.startConnection();
+    networkManager.startConnection()
 
 #create motors
 leftMotor = DriveMotor(35, 37)
 rightMotor = DriveMotor(36, 38)
 
-networkManager = NetworkManager();
+exBeh = ExternalBehaviour.ExternalBehaviour(leftMotor, rightMotor)
+
+networkManager = NetworkManager()
 thread.start_new_thread(startNetwork, ())
 
 for dir in range(-1, 2):

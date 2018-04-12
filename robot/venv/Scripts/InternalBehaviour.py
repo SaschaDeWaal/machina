@@ -1,3 +1,5 @@
+import numpy
+
 """
 
 This class takes care of all the internal behaviour.
@@ -6,8 +8,6 @@ as well as how they're changed.
 
 """
 
-import ExternalBehaviour
-
 class InternalBehaviour:
 
     """
@@ -15,6 +15,11 @@ class InternalBehaviour:
     These parameters are used in order to determine the various aspects of the robot's emotional state.
     The parameters should range from 0 to 10, and are accompanied by a separate threshold value that indicates
     when the 'switch' between the positive and negative end of the emotion should occur.
+
+    It also sets values for the 'wishes' parameters. These are to be multiplied by sensor output in order to determine
+    the effect that certain interactions by the users have on the robot. Wishes can be positive and negative, to allow
+    a like or dislike for some particular action. They're supposed to have a value between -2 and 2 to indicate for
+    both a high and mild (dis)like.
     """
     def __init__(self):
         # Fun versus Frustration
@@ -32,6 +37,36 @@ class InternalBehaviour:
         # Contendedness versus Jealousy
         self._contJeal = 5
         self._contJealThres = 5.5
+
+
+        # Wish parameters. Can be added/removed/changed as necessary.
+        self._touchPreference = 0 # how robot reacts to being touched
+        self.touchBorder = 0.5    # amount of touch needed for robot to start disliking it.
+        self._lightPreference = 0 # how much the robot likes to be in bright places
+
+        self._isBeingPetted = False     # Whether robot is being petted, depends on light sensor input
+        self._isInDarkness = False      # Whether robot currently is in a dark area
+        self._isLifted = False          # whether robot is being lifted by someone
+        self._isHit = False             # Whether robot is receiving an uppercut, noted by a sudden acceleration
+                                        # and speed increase in the gyroscope
+        self._hasCollided = False       # Whether robot has collided with something, noted by a sudden acceleration
+                                        # and speed decrease in the gyroscope
+        self._gyroscope = [0,0,0,0,0,0] # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
+
+
+
+    """
+    Function that take in the sensor output from light detector and changes the appropriate values depending on lightPreference
+    """
+    def LightEffect(self, lightInput):
+        self._fearCalm += lightInput * self._lightPreference
+
+    """
+    Function that take in the sensor output from light detector,
+    """
+    def TouchEffect(self):
+        if self._isBeingPetted:
+            self._funFrus += self._touchPreference
 
     """
     This function is used to provide the name of one of the parameters, and an accompanied value.
