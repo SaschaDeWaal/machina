@@ -17,7 +17,11 @@ void loop() {
 String CreateJson(int messageIndex){
   return "{" +
     CreateJsonLine("index", String(messageIndex)) + "," +
-    CreateJsonLine("sensor1", "false") +
+    CreateJsonLine("gyroscoop", "[0, 0, 0]") + "," +
+	CreateJsonLine("Accelerometer", "[0, 0, 0]") + "," +
+	CreateJsonLine("temperature", "[20, 20, 20]") + "," +
+	CreateJsonLine("battery", "1024") + "," +
+	CreateJsonLine("light", "[1024, 20, 500]") +
   "}";
 }
 

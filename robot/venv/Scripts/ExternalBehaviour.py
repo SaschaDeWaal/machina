@@ -1,7 +1,7 @@
 from DriveMotor import DriveMotor
 import InternalBehaviour
 import time
-import Sensor
+from Sensor import Sensor
 import random
 import datetime
 

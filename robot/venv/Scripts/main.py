@@ -1,35 +1,27 @@
 import time
 import thread
-from NetworkManager import NetworkManager
-from DriveMotor import DriveMotor
-import ExternalBehaviour
+import sys
 
-def startNetwork():
-    networkManager.startConnection()
+from DriveMotor import DriveMotor
+from SensorBridge import SensorBridge
+#import ExternalBehaviour
 
 #create motors
 leftMotor = DriveMotor(35, 37)
 rightMotor = DriveMotor(36, 38)
 
-exBeh = ExternalBehaviour.ExternalBehaviour(leftMotor, rightMotor)
+#exBeh = ExternalBehaviour.ExternalBehaviour(leftMotor, rightMotor)
 
-networkManager = NetworkManager()
-thread.start_new_thread(startNetwork, ())
+sensorBridge = SensorBridge()
 
-for dir in range(-1, 2):
-    leftMotor.setDirection(dir)
-    rightMotor.setDirection(dir)
-    for i in range(10, 30):
-        leftMotor.setSpeed(i * 3000)
-        rightMotor.setSpeed(i * 3000)
-        print('speed: ' + str(i * 3000))
-        networkManager.sendMessage(str(i * 3000) + ' dir: ' + str(dir))
-        time.sleep(1)
+#wait until exit
+while raw_input('Exit? (y): ') != 'y':
+    print "msg index: " + sensorBridge.lastData['index']
 
 
+sensorBridge.stop()
+sys.exit()
 
-leftMotor.setDirection(0)
-rightMotor.setDirection(0)
 
 
 
