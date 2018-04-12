@@ -1,9 +1,7 @@
-from DriveMotor import DriveMotor
+from Objects.DriveMotor import DriveMotor
 import InternalBehaviour
 import time
-from Sensor import Sensor
 import random
-import datetime
 
 """
 

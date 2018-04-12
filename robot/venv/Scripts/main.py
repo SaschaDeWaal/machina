@@ -1,9 +1,7 @@
-import time
-import thread
 import sys
 
-from DriveMotor import DriveMotor
-from SensorBridge import SensorBridge
+from Objects.DriveMotor import DriveMotor
+from Objects.SensorBridge import SensorBridge
 #import ExternalBehaviour
 
 #create motors
