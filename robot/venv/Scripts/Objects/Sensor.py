@@ -1,8 +1,10 @@
 #import picam
 import cv2
+import os
 import time
-from PIL import ImageGrab
 import numpy as np
+import time
+import msvcrt
 
 """
 
@@ -14,7 +16,8 @@ This is for easier storage and usage by other files.
 class Sensor:
     def __init__(self):
         print"hi"
-        self.func1()
+        self.extractCameraFrames()
+        # self.func1()
         #self.func2()
         #self.func3()
 
@@ -53,7 +56,7 @@ class Sensor:
     def func2(self):
         cap = cv2.VideoCapture(0)
         while (cap.isOpened()):
-            ret, frame = cap.read()
+            ret, frame = cap.read
             cv2.imshow('WindowName', frame)
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 cap.release()
@@ -69,6 +72,25 @@ class Sensor:
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 cv2.destroyAllWindows()
                 break
+
+    def extractCameraFrames(self):
+        cap = cv2.VideoCapture(0)
+        count = 0
+        while True:
+            ret, img = cap.read()
+            if ret == True:
+                count += 1
+                # Used to set fps, Set 50 for 20, 100 for 10, 33 for 30
+                cv2.waitKey(100)
+                cv2.imshow('Webcam', img)
+                # File path to save the frames
+                img_path = "C:\\Users\\Ishdeep Bhandari\\Desktop\\Frames_Cam"
+                # Resizing to desired size for the frame
+                resized_img = cv2.resize(img,(128,128))
+                cv2.imwrite(os.path.join(img_path,'Frame %d.jpg' % count), resized_img)
+                # To exit just stop the code
+        cap.release()
+        cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     derp = Sensor()
