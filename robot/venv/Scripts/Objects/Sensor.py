@@ -72,7 +72,7 @@ class Sensor:
             if cv2.waitKey(25) & 0xFF == ord('q'):
                 cv2.destroyAllWindows()
                 break
-
+    """" Function to extract frames from the camera"""
     def extractCameraFrames(self):
         cap = cv2.VideoCapture(0)
         count = 0

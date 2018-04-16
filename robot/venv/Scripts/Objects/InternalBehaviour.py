@@ -1,5 +1,5 @@
 import numpy
-
+import json
 """
 
 This class takes care of all the internal behaviour.
@@ -109,6 +109,10 @@ class InternalBehaviour:
                 self._contJeal = 10
             elif self._contJeal < 0:
                 self._contJeal = 0
+
+    """" Function to retrieve json values from Pi and pass into variables"""
+    def jsonParsing (self,json_data):
+        return json.load(json_data)
 
 
 
