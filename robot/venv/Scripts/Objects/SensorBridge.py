@@ -9,7 +9,7 @@ class SensorBridge:
         self.ser = serial.Serial(port='/dev/ttyS0', baudrate = 115200, timeout = 5)
         self.lastData = json.loads('{}')
 
-        self.listening = True;
+        self.listening = True
         self.thread = Thread(target=self.arduinoConnection, args=())
         self.thread.start()
 
