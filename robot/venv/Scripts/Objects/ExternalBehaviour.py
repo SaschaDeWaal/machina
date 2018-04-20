@@ -1,4 +1,4 @@
-from Objects.DriveMotor import DriveMotor
+from DriveMotor import DriveMotor
 import InternalBehaviour
 import time
 import random
