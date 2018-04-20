@@ -54,6 +54,9 @@ class InternalBehaviour:
         self._hasCollided = False       # Whether robot has collided with something, noted by a sudden acceleration
                                         # and speed decrease in the gyroscope
         self._gyroscope = [0,0,0,0,0,0] # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
+
+
+        # Call function for colour detection
         self.colorDetect()
 
 
@@ -128,7 +131,7 @@ class InternalBehaviour:
 
             hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-            # definig the range of red color
+            # defining the range of red color
             red_lower = np.array([136, 87, 111], np.uint8)
             red_upper = np.array([180, 255, 255], np.uint8)
 
