@@ -1,26 +1,22 @@
 import sys
-
 from Objects.DriveMotor import DriveMotor
 from Objects.SensorBridge import SensorBridge
-from Objects.Camera import Camera
-#import ExternalBehaviour
+from BehaviorManager import BehaviorManager;
 
 #create motors
 leftMotor = DriveMotor(35, 37)
 rightMotor = DriveMotor(36, 38)
-
-#exBeh = ExternalBehaviour.ExternalBehaviour(leftMotor, rightMotor)
-
 sensorBridge = SensorBridge()
-camera = Camera()
+behaviorManager = BehaviorManager(leftMotor, rightMotor, sensorBridge)
 
-#wait until exit
-while raw_input('Exit? (y): ') != 'y':
-    print ""
+# start
+behaviorManager.start()
+
+raw_input("Press Enter to exit")
 
 #stop all
-#sensorBridge.stop()
-camera.stop()
+sensorBridge.stop()
+behaviorManager.stop()
 sys.exit()
 
 
