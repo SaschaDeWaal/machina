@@ -1,14 +1,14 @@
 
 class RobotData:
+    """ Here we can store data of the robot. This can be used and modified by the behaviours."""
 
-    def __init__(self, motorLeft, motorRight):
+    def __init__(self, motorLeft, motorRight, arduinoBridge):
         self.happiness = 0
         self.efficientness = 0
-        self.motorLeft = motorLeft
-        self.motorRight = motorRight
 
-    def setData(self, motorRight, motorLeft):
-        self.motorRight = motorRight
         self.motorLeft = motorLeft
+        self.motorRight = motorRight
+        self.arduinoBridge = arduinoBridge
+        
 
 
