@@ -1,18 +1,16 @@
 
 
 class BaseState(object):
+    """ This is the base state. All other behaviors should inheritance from this object.
+    If a event/other inheritance should be called/fired all the time, you can do it here """
 
     def __init__(self):
         self.nextBehavior = None
-        self.leftMotor = None
-        self.rightMotor = None
-        self.sensorBridge = None
+        self.robotData = None
 
-
-    def setVariables(self, leftMotor, rightMotor, sensorBridge):
-        self.leftMotor = leftMotor
-        self.rightMotor = rightMotor
-        self.sensorBridge = sensorBridge;
+    def setRobotData(self, robotData):
+        """ Set the robot data so the behavior can use and modify it. """
+        self.robotData = robotData
 
     def goToState(self, newState):
         """ call this to tell the system this behaviour has failed """
