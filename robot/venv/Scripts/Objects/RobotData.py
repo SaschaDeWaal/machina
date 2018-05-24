@@ -5,10 +5,33 @@ class RobotData:
     def __init__(self, motorLeft, motorRight, arduinoBridge):
         self.happiness = 0
         self.efficientness = 0
+        self.arousal = 1                        # Parameter that indicates the anger level within a robot.
+                                                # As it increases, the robot should move more aggressively
+                                                # Should have a value between 1 and 10 (inclusive)
+        self._isBeingPetted = False  # Whether robot is being petted, depends on light sensor input
+
 
         self.motorLeft = motorLeft
         self.motorRight = motorRight
         self.arduinoBridge = arduinoBridge
-        
+        self._gyroscope = [0, 0, 0, 0, 0, 0]  # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
 
 
+    # Setter for the arousal parameter.
+    def setArousal(self, value):
+        self.arousal = value
+        self.capArousal()
+
+
+    # Used to ensure arousal won't go above 10, or below 1.
+    def capArousal(self):
+        if self.arousal > 10:
+            self.arousal = 10
+        elif self.arousal < 1:
+            self.arousal = 1
+
+
+    # Function that should decrease arousal level depending on how long the robot is being pet
+    def pettingEffect(self):
+        # Something with a timer...?
+        return
