@@ -53,18 +53,18 @@ class DriveState(BaseState):
     Function that aligns the robot to a given amount of angles.
     This is accomplished by rotating it in the corresponding direction until the robot's alignment is within
     a margin of 6 degrees: 3 below and 3 above the supposed alignment.
-    The turning speed is modified by the arousal level. --->> yet to be implemented
+    The turning speed is modified by the arousal level.
     """
     def TurnDegrees(self, futureDegreesTurned):
         if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
             self.MotorBehaviour(0, 0)
         elif futureDegreesTurned < self._degreesTurned:
-            self.MotorBehaviour(-100, 100)
+            self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal , 1000 + 1800 * self.robotData.arousal)
             while futureDegreesTurned < self._degreesTurned:
                 if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
                     self.MotorBehaviour(0, 0)
         elif futureDegreesTurned > self._degreesTurned:
-            self.MotorBehaviour(100, -100)
+            self.MotorBehaviour(1000 + 1800 * self.robotData.arousal, -1000 - 1800 * self.robotData.arousal)
             while futureDegreesTurned > self._degreesTurned:
                 if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
                     self.MotorBehaviour(0, 0)
@@ -82,7 +82,7 @@ class DriveState(BaseState):
         if stoptime < time.time():
             self.MotorBehaviour(0, 0)
         elif stoptime > time.time():
-            self.MotorBehaviour(1000, 1000)
+            self.MotorBehaviour(1000 + 1800 * self.robotData.arousal, 1000 + 1800 * self.robotData.arousal)
             while stoptime > time.time():
                 if stoptime < time.time():
                     self.MotorBehaviour(0, 0)
@@ -95,7 +95,7 @@ class DriveState(BaseState):
         if stoptime < time.time():
             self.MotorBehaviour(0, 0)
         elif stoptime > time.time():
-            self.MotorBehaviour(-1000, -1000)
+            self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal, -1000 - 1800 * self.robotData.arousal)
             while stoptime > time.time():
                 if stoptime < time.time():
                     self.MotorBehaviour(0, 0)
