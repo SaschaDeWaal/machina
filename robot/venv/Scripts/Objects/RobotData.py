@@ -14,7 +14,7 @@ class RobotData:
         self.motorLeft = motorLeft
         self.motorRight = motorRight
         self.arduinoBridge = arduinoBridge
-        self._gyroscope = [0, 0, 0, 0, 0, 0]  # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
+        self.gyroscope = [0, 0, 0, 0, 0, 0]  # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
 
 
     # Setter for the arousal parameter.
