@@ -4,6 +4,7 @@ class BaseState(object):
     """ This is the base state. All other behaviors should inheritance from this object.
     If a event/other inheritance should be called/fired all the time, you can do it here """
 
+
     def __init__(self):
         self.nextBehavior = None
         self.robotData = None

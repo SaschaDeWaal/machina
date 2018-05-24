@@ -1,7 +1,7 @@
 import sys
 from Objects.DriveMotor import DriveMotor
 from Objects.ArduinoBridge import ArduinoBridge
-from Objects.RobotData import RobotData;
+from Objects.RobotData import RobotData
 from BehaviorManager import BehaviorManager
 
 # Create objects

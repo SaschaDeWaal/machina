@@ -1,5 +1,3 @@
-from Scripts.Objects.DriveMotor import DriveMotor # Uh... wut is going on here..
-from Objects.RobotData import RobotData
 import BaseState
 import time
 import random
@@ -29,8 +27,8 @@ class DriveState(BaseState):
     A negative number indicates the motor should drive backward
     """
     def MotorBehaviour(self, speedLeft, speedRight):
-        DriveMotor.setSpeed(self._motorLeft, speedLeft)
-        DriveMotor.setSpeed(self._motorRight, speedRight)
+        self.robotData.motorLeft.setSpeed(speedLeft)
+        self.robotData.motorRight.setSpeed(speedRight)
 
 
     """
