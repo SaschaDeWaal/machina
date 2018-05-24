@@ -5,3 +5,4 @@
 robot/venv/Lib/*
 
 robot/.idea/workspace.xml
+robot/venv/.idea/workspace.xml
