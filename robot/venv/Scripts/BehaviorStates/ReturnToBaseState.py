@@ -30,7 +30,7 @@ class ReturnToBaseState(BaseState):
                 self.DriveState.DriveState.TimeDriveForward(2)
 
     """
-    Makes the robot turn on the spot to look around its environment to see whether it can see its own base.
+    Makes the robot turn on the spot to look around its environment to see whether it can see its own base
     """
     def lookAround(self):
         gyro = self.robotData.gyroscope
@@ -43,7 +43,12 @@ class ReturnToBaseState(BaseState):
         baseFound = False
         if not baseFound:
             self.DriveState.DriveState.TurnDegrees(5 * self.leftRight)
-        else:
+        elif baseFound: # this should include an 'and' where it states there is white (snow) in sight
+            self.DriveState.DriveState.TurnDegrees(90 * self.leftRight)
+            self.DriveState.DriveState.TimeDriveForward(1)
+            self.DriveState.DriveState.TurnDegrees(135 * (-1*self.leftRight))
+        elif baseFound: # this should include an 'and' where it states there is no white (snow) in sight
             # Drive towards base
+            self.DriveState.DriveState.TimeDriveForward(2)
             self.leftRight = 2
             return
