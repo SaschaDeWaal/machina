@@ -18,13 +18,16 @@ class ReturnToBaseState(BaseState):
 
     def onLeave(self):
         super(ReturnToBaseState, self).onLeave()
+        # Go to removeSnow
 
     def onUpdate(self, delta):
         super(ReturnToBaseState, self).onUpdate(delta)
         self.timer -= delta
         if self.leftRight != 2:
             self.lookAround()
-
+        else:
+            if self.robotData.motorLeft.speed == 0 and self.robotData.motorRight.speed == 0:
+                self.DriveState.DriveState.TimeDriveForward(2)
 
     """
     Makes the robot turn on the spot to look around its environment to see whether it can see its own base.
@@ -36,7 +39,6 @@ class ReturnToBaseState(BaseState):
             self.leftRight = random.randint(0, 1)  # 0 if left, 1 if right
             if self.leftRight == 0:
                 self.leftRight = -1
-
         # Do pole and colour detection here
         baseFound = False
         if not baseFound:
