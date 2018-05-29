@@ -1,9 +1,11 @@
 
 import BaseState
+import DriveState
 import random
 import time
 
-class AttackBaseState(BaseState):
+
+class AttackBaseState(DriveState):
 
     def __init__(self):
         super(AttackBaseState, self).__init__()
@@ -18,7 +20,8 @@ class AttackBaseState(BaseState):
 
     def onLeave(self):
         super(AttackBaseState, self).onLeave()
-        self.DriveState.DriveState.TimeDriveForward(3)
+        #self.DriveState.DriveState.TimeDriveForward(3)
+        super(AttackBaseState, self).TimeDriveForward(3)
         # Go to wandering behaviour
 
     def onUpdate(self, delta):
@@ -28,7 +31,7 @@ class AttackBaseState(BaseState):
             self.lookAround()
         else:
             if self.robotData.motorLeft.speed == 0 and self.robotData.motorRight.speed == 0:
-                self.DriveState.DriveState.TimeDriveForward(2)
+                super(AttackBaseState, self).TimeDriveForward(2)
 
     """
     Makes the robot turn on the spot to look around its environment to see whether it can see the base of an opposing team.
@@ -42,14 +45,15 @@ class AttackBaseState(BaseState):
                 self.leftRight = -1
         # Do pole and colour detection here; note: look for a base of a different colour
         baseFound = False
-        if not baseFound: 
-            self.DriveState.DriveState.TurnDegrees(5 * self.leftRight)
+        if not baseFound:
+            super(AttackBaseState, self).TurnDegrees(5 * self.leftRight)
         elif baseFound: # this should include an 'and' where it states there is no white (snow) in sight
             # Drive either to the left or right (depends on leftRight), and turn back the same amount of degrees afterward
-            self.DriveState.DriveState.TurnDegrees(90 * self.leftRight)
-            self.DriveState.DriveState.TimeDriveForward(1)
-            self.DriveState.DriveState.TurnDegrees(135 * (-1*self.leftRight))
+            super(AttackBaseState, self).TurnDegrees(90 * self.leftRight)
+
+            super(AttackBaseState, self).TimeDriveForward(1)
+            super(AttackBaseState, self).TurnDegrees(135 * (-1*self.leftRight))
         elif baseFound: # this should include an 'and' where it states there is white (snow) in sight
-            self.DriveState.DriveState.TimeDriveForward(2)
+            super(AttackBaseState, self).TimeDriveForward(2)
             self.leftRight = 2
             return

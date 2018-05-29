@@ -1,3 +1,5 @@
+import time
+
 
 class RobotData:
     """ Here we can store data of the robot. This can be used and modified by the behaviours."""
@@ -8,13 +10,13 @@ class RobotData:
         self.arousal = 1                        # Parameter that indicates the anger level within a robot.
                                                 # As it increases, the robot should move more aggressively
                                                 # Should have a value between 1 and 10 (inclusive)
-        self._isBeingPetted = False  # Whether robot is being petted, depends on light sensor input
-
+        self.isBeingPetted = False  # Whether robot is being petted, depends on light sensor input
 
         self.motorLeft = motorLeft
         self.motorRight = motorRight
         self.arduinoBridge = arduinoBridge
         self.gyroscope = [0, 0, 0, 0, 0, 0]  # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
+        self.timer = 5
 
 
     # Setter for the arousal parameter.
@@ -32,6 +34,10 @@ class RobotData:
 
 
     # Function that should decrease arousal level depending on how long the robot is being pet
-    def pettingEffect(self):
+    def pettingEffect(self, timeStarted):
         # Something with a timer...?
-        return
+        if True: #if arduinobridge.something -> if light sensor is above some value
+            self.isBeingPetted = True
+            # go to BeingPetState
+        else:
+            self.isBeingPetted = False

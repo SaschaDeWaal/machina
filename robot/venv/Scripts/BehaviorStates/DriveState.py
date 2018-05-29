@@ -10,6 +10,9 @@ class DriveState(BaseState):
         self._degreesTurned = 0         # The amount of degrees the robot is turned, from 0 to 360.
                                         # It should be ensured this is relative to the gyroscope input
                                         # e.g. the initial orientation should be equal to 0 degrees.
+        self.drivingFwd = False
+        self.drivingBck = False
+        self.turning = False
 
     def onEnter(self):
         super(DriveState, self).onEnter()
@@ -39,11 +42,12 @@ class DriveState(BaseState):
         randNum = random.randint(0, 2)
         curTime = time.time()
         duration = random.randrange(1, 3, 0.25)
-        stopTime = curTime + duration
+        #stopTime = curTime + duration
+        self.timer = duration
         if randNum == 0:
-            self.TimeDriveForward(stopTime)
+            self.TimeDriveForward()
         elif randNum == 1:
-            self.TimeDriveBackward(stopTime)
+            self.TimeDriveBackward()
         elif randNum == 2:
             degreesToTurnTo = random.randrange(0, 359, 1)
             self.TurnDegrees(degreesToTurnTo)
@@ -58,6 +62,16 @@ class DriveState(BaseState):
     def TurnDegrees(self, futureDegreesTurned):
         if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
             self.MotorBehaviour(0, 0)
+            self.turning = False
+        elif futureDegreesTurned < self._degreesTurned:
+            self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal , 1000 + 1800 * self.robotData.arousal)
+            self.turning = True
+        elif futureDegreesTurned > self._degreesTurned:
+            self.MotorBehaviour(1000 + 1800 * self.robotData.arousal, -1000 - 1800 * self.robotData.arousal)
+            self.turning = True
+        """
+                if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
+            self.MotorBehaviour(0, 0)
         elif futureDegreesTurned < self._degreesTurned:
             self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal , 1000 + 1800 * self.robotData.arousal)
             while futureDegreesTurned < self._degreesTurned:
@@ -68,6 +82,7 @@ class DriveState(BaseState):
             while futureDegreesTurned > self._degreesTurned:
                 if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
                     self.MotorBehaviour(0, 0)
+        """
 
 
     """
@@ -78,24 +93,42 @@ class DriveState(BaseState):
 
     Returns false if this time has not yet passed, and true otherwise.
     """
-    def TimeDriveForward(self, stoptime):
-        if stoptime < time.time():
+    def TimeDriveForward(self): #used to contain stopTime
+        if self.timer <= 0:
+            self.MotorBehaviour(0, 0)
+            self.drivingFwd = False
+        elif self.timer > 0:
+            if not self.drivingFwd:
+                self.MotorBehaviour(1000 + 1800 * self.robotData.arousal, 1000 + 1800 * self.robotData.arousal)
+                self.drivingFwd = True
+        """
+                if stoptime < time.time():
             self.MotorBehaviour(0, 0)
         elif stoptime > time.time():
             self.MotorBehaviour(1000 + 1800 * self.robotData.arousal, 1000 + 1800 * self.robotData.arousal)
             while stoptime > time.time():
                 if stoptime < time.time():
                     self.MotorBehaviour(0, 0)
+        """
 
     """
     Drives both motors backward for a given time
     Same as above, but in opposite direction
     """
-    def TimeDriveBackward(self, stoptime):
-        if stoptime < time.time():
+    def TimeDriveBackward(self): #used to contain stopTime
+        if self.timer <= 0:
+            self.MotorBehaviour(0, 0)
+            self.drivingBck = False
+        elif self.timer > 0:
+            if not self.drivingBck:
+                self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal, -1000 - 1800 * self.robotData.arousal)
+                self.drivingBck = True
+        """
+                if stoptime < time.time():
             self.MotorBehaviour(0, 0)
         elif stoptime > time.time():
             self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal, -1000 - 1800 * self.robotData.arousal)
             while stoptime > time.time():
                 if stoptime < time.time():
                     self.MotorBehaviour(0, 0)
+        """
