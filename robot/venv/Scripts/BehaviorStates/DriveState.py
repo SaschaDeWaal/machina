@@ -59,6 +59,9 @@ class DriveState(BaseState):
     a margin of 6 degrees: 3 below and 3 above the supposed alignment.
     The turning speed is modified by the arousal level.
     """
+    def asyncTurnDegrees(self, degrees):
+        pass
+
     def TurnDegrees(self, futureDegreesTurned):
         if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
             self.MotorBehaviour(0, 0)

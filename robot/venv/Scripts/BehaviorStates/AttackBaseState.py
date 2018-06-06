@@ -1,9 +1,8 @@
-
 import BaseState
 import DriveState
 import random
 import time
-
+from thread import start_new_thread
 
 class AttackBaseState(DriveState):
 
@@ -16,7 +15,7 @@ class AttackBaseState(DriveState):
     def onEnter(self):
         super(AttackBaseState, self).onEnter()
         self.timer = 2
-        self.lookAround()
+        start_new_thread(self.lookAround, ())
 
     def onLeave(self):
         super(AttackBaseState, self).onLeave()
@@ -26,12 +25,12 @@ class AttackBaseState(DriveState):
 
     def onUpdate(self, delta):
         super(AttackBaseState, self).onUpdate(delta)
-        self.timer -= delta
-        if self.leftRight != 2:
-            self.lookAround()
-        else:
-            if self.robotData.motorLeft.speed == 0 and self.robotData.motorRight.speed == 0:
-                super(AttackBaseState, self).TimeDriveForward(2)
+        #self.timer -= delta
+        #if self.leftRight != 2:
+        #    start_new_thread(self.lookAround, ())
+        #else:
+        #    if self.robotData.motorLeft.speed == 0 and self.robotData.motorRight.speed == 0:
+        #        super(AttackBaseState, self).TimeDriveForward(2)
 
     """
     Makes the robot turn on the spot to look around its environment to see whether it can see the base of an opposing team.

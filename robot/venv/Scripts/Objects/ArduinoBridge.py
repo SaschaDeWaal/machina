@@ -19,20 +19,27 @@ class ArduinoBridge:
         print "start connection to arduino"
         while self.open:
             data = self.ser.readline()
+            #print(data)
             try:
                 if data[0] == "{":
                     self.lastData = json.loads(data)
-                    print(data)
             except:
-                print "Unexpected error:", sys.exc_info()
-                sys.exit()
+                pass
 
     def send(self, msg):
         """ Send a command to the arduino """
         if self.open:
-            self.ser.write((msg + ";").encode())
+            self.ser.write(msg)
 
     def stop(self):
         """ Close the serial connection to the arduino """
         self.open = False
         self.ser.close()
+
+    def setTeamColour(self, number):
+        if number == 0:
+            self.send('1')
+        if number == 1:
+            self.send('2')
+        if number == 2:
+            self.send('3')

@@ -31,9 +31,9 @@ class BehaviorManager:
         """ Stop the behavior thread. This will also stop the current behavior """
         self.active = False
 
+
     def setState(self, new_state_name):
         """ Change the current behavior state """
-
         self.currentState.onLeave()
         self.currentState = states[new_state_name]()
         self.currentState.setRobotData(self.robotData)
@@ -44,7 +44,7 @@ class BehaviorManager:
     def loop(self):
         while self.active:
             delta = time.time() - self.lastTime;
-            self.lastTime = time.time();
+            self.lastTime = time.time()
 
             if self.currentState.nextBehavior is None:
                 self.currentState.onUpdate(delta)
