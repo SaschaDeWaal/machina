@@ -3,6 +3,7 @@ import BaseState
 import DriveState
 import time
 import random
+from thread import start_new_thread
 
 class ReturnToBaseState(BaseState):
 
@@ -14,20 +15,22 @@ class ReturnToBaseState(BaseState):
     def onEnter(self):
         super(ReturnToBaseState, self).onEnter()
         self.timer = 2
-        self.lookAround()
+        #self.lookAround()
+        start_new_thread(self.lookAround, ())
 
     def onLeave(self):
         super(ReturnToBaseState, self).onLeave()
+        super(ReturnToBaseState, self).TimeDriveForward(3)
         # Go to removeSnow
 
     def onUpdate(self, delta):
         super(ReturnToBaseState, self).onUpdate(delta)
         self.timer -= delta
-        if self.leftRight != 2:
-            self.lookAround()
-        else:
-            if self.robotData.motorLeft.speed == 0 and self.robotData.motorRight.speed == 0:
-                self.DriveState.DriveState.TimeDriveForward(2)
+        #if self.leftRight != 2:
+        #    self.lookAround()
+        #else:
+        #    if self.robotData.motorLeft.speed == 0 and self.robotData.motorRight.speed == 0:
+        #        self.DriveState.DriveState.TimeDriveForward(2)
 
     """
     Makes the robot turn on the spot to look around its environment to see whether it can see its own base
