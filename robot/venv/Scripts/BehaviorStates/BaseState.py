@@ -5,6 +5,7 @@ class BaseState(object):
     def __init__(self):
         self.nextBehavior = None
         self.robotData = None
+        self.gyro = self.robotData.gyroscope
 
     def setRobotData(self, robotData):
         """ Set the robot data so the behavior can use and modify it. """
@@ -24,4 +25,15 @@ class BaseState(object):
 
     def onUpdate(self, delta):
         """ Called every frame """
+        deltaGyro = self.gyro - self.robotData.gyroscope        # Take the difference between the current and previous values of the gyroscope
+        if deltaGyro[0] + deltaGyro[1] + deltaGyro[2] > 100:
+            # go to beingShakenState, as it's being jostled
+            return
+        self.gyro = self.robotData.gyroscope
         pass
+
+    def DetermineNextState(self):
+        self.gyro = self.robotData.gyroscope
+        if self.gyro[1] > 100:
+            # go to beingPetState, as it's being picked up
+            return
