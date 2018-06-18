@@ -29,6 +29,9 @@ class BaseState(object):
         if deltaGyro[0] + deltaGyro[1] + deltaGyro[2] > 100:
             # go to beingShakenState, as it's being jostled
             return
+        if self.gyro[1] > 100:
+            # go to beingPetState, as it's being picked up
+            return
         if self.robotData.arousal > 7:
             # go to AngeredState
             return
