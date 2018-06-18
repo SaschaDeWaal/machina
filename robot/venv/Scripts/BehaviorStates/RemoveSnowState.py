@@ -33,6 +33,8 @@ class RemoveSnowState(DriveState):
 
     """
     Makes the robot turn on the spot to look around its environment to see whether it can find snow to push
+    Robot randomly picks left or right to search for snow in that direction.
+    Once snow is found, the robot drives forward for 2 seconds, followed by 2 back, and restarts the process again.
     """
     def lookAround(self):
         gyro = self.robotData.gyroscope

@@ -25,6 +25,9 @@ class BaseState(object):
         """ Called when this behavior stops """
         pass
 
+    """
+    Mainly performs checks to see what state should be transitioned to, based on sensor input.
+    """
     def onUpdate(self, delta):
         """ Called every frame """
         randInt = random.randrange(1, 50, 1)

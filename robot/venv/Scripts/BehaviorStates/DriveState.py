@@ -24,6 +24,10 @@ class DriveState(BaseState):
     def onLeave(self):
         super(DriveState, self).onLeave()
 
+    """
+    Determines what function to execute depending on the passed on parameters in SetCurFunction, called in other states.
+    This given function will run for the given amount of time by changing self.timer.
+    """
     def onUpdate(self, delta):
         super(DriveState, self).onUpdate(delta)
         self.timer -= delta

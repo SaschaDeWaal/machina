@@ -20,7 +20,7 @@ class AttackBaseState(DriveState):
     def onLeave(self):
         super(AttackBaseState, self).onLeave()
         #self.DriveState.DriveState.TimeDriveForward(3)
-        super(AttackBaseState, self).SetCurFunction(3, "TimeDriveForward", 0)
+        #super(AttackBaseState, self).SetCurFunction(3, "TimeDriveForward", 0)
         #super(AttackBaseState, self).TimeDriveForward(3)
         BaseState.BaseState.goToState(self, "ReturnToBaseState")
 
@@ -35,6 +35,9 @@ class AttackBaseState(DriveState):
 
     """
     Makes the robot turn on the spot to look around its environment to see whether it can see the base of an opposing team.
+    It randomly picks left or right to search for snow in that direction.
+    Once the base is found, and there is snow in the way, the robot drives forward for 2 seconds, followed by 2 back,
+    after which it'll transition to ReturnToBaseState.
     """
     def lookAround(self):
         gyro = self.robotData.gyroscope
@@ -60,4 +63,6 @@ class AttackBaseState(DriveState):
         elif baseFound: # this should include an 'and' where it states there is white (snow) in sight
             super(AttackBaseState, self).SetCurFunction(2, "TimeDriveForward", 0)
             #super(AttackBaseState, self).TimeDriveForward(2)
+            super(AttackBaseState, self).SetCurFunction(2, "TimeDriveBackward", 0)
             self.leftRight = 2
+            self.onLeave()
