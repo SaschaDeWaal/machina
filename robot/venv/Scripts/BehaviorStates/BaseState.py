@@ -1,3 +1,5 @@
+import random
+
 class BaseState(object):
     """ This is the base state. All other behaviors should inheritance from this object.
     If a event/other inheritance should be called/fired all the time, you can do it here """
@@ -25,6 +27,9 @@ class BaseState(object):
 
     def onUpdate(self, delta):
         """ Called every frame """
+        randInt = random.randrange(1, 50, 1)
+        if randInt == 42 and self.robotData.arousal > 6:
+            self.goToState("AngeredState")
         deltaGyro = self.gyro - self.robotData.gyroscope        # Take the difference between the current and previous values of the gyroscope
         if deltaGyro[0] + deltaGyro[1] + deltaGyro[2] > 100:
             # go to beingShakenState, as it's being jostled
