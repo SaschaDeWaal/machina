@@ -20,8 +20,9 @@ class AttackBaseState(DriveState):
     def onLeave(self):
         super(AttackBaseState, self).onLeave()
         #self.DriveState.DriveState.TimeDriveForward(3)
-        super(AttackBaseState, self).TimeDriveForward(3)
-        BaseState.goToState("ReturnToBaseState")
+        super(AttackBaseState, self).SetCurFunction(3, "TimeDriveForward", 0)
+        #super(AttackBaseState, self).TimeDriveForward(3)
+        BaseState.BaseState.goToState(self, "ReturnToBaseState")
 
     def onUpdate(self, delta):
         super(AttackBaseState, self).onUpdate(delta)
@@ -45,13 +46,18 @@ class AttackBaseState(DriveState):
         # Do pole and colour detection here; note: look for a base of a different colour
         baseFound = False
         if not baseFound:
-            super(AttackBaseState, self).TurnDegrees(5 * self.leftRight)
+            #super(AttackBaseState, self).TurnDegrees(5 * self.leftRight)
+            super(AttackBaseState, self).SetCurFunction(10000, "TurnDegrees", 5 * self.leftRight)
         elif baseFound: # this should include an 'and' where it states there is no white (snow) in sight
             # Drive either to the left or right (depends on leftRight), and turn back the same amount of degrees afterward
-            super(AttackBaseState, self).TurnDegrees(90 * self.leftRight)
+            #super(AttackBaseState, self).TurnDegrees(90 * self.leftRight)
+            super(AttackBaseState, self).SetCurFunction(10000, "TurnDegrees", 90 * self.leftRight)
 
-            super(AttackBaseState, self).TimeDriveForward(1)
-            super(AttackBaseState, self).TurnDegrees(135 * (-1*self.leftRight))
+            super(AttackBaseState, self).SetCurFunction(1, "TimeDriveForward", 0)
+            #super(AttackBaseState, self).TimeDriveForward(1)
+            super(AttackBaseState, self).SetCurFunction(10000, "TurnDegrees", 135 * (-1*self.leftRight))
+            #super(AttackBaseState, self).TurnDegrees(135 * (-1*self.leftRight))
         elif baseFound: # this should include an 'and' where it states there is white (snow) in sight
-            super(AttackBaseState, self).TimeDriveForward(2)
+            super(AttackBaseState, self).SetCurFunction(2, "TimeDriveForward", 0)
+            #super(AttackBaseState, self).TimeDriveForward(2)
             self.leftRight = 2

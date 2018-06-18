@@ -20,8 +20,9 @@ class ReturnToBaseState(DriveState):
 
     def onLeave(self):
         super(ReturnToBaseState, self).onLeave()
-        super(ReturnToBaseState, self).TimeDriveForward(3)
-        BaseState.goToState("RemoveSnowState")
+        DriveState.timer = 3
+        super(ReturnToBaseState, self).TimeDriveForward()
+        BaseState.BaseState.goToState(self, "RemoveSnowState")
         # Go to removeSnow
 
     def onUpdate(self, delta):
@@ -49,10 +50,12 @@ class ReturnToBaseState(DriveState):
             self.DriveState.DriveState.TurnDegrees(5 * self.leftRight)
         elif baseFound: # this should include an 'and' where it states there is white (snow) in sight
             self.DriveState.DriveState.TurnDegrees(90 * self.leftRight)
-            self.DriveState.DriveState.TimeDriveForward(1)
+            DriveState.timer = 1
+            self.DriveState.DriveState.TimeDriveForward()
             self.DriveState.DriveState.TurnDegrees(135 * (-1*self.leftRight))
         elif baseFound: # this should include an 'and' where it states there is no white (snow) in sight
             # Drive towards base
-            self.DriveState.DriveState.TimeDriveForward(2)
+            DriveState.timer = 2
+            self.DriveState.DriveState.TimeDriveForward()
             self.leftRight = 2
             self.onLeave()
