@@ -21,6 +21,7 @@ class ReturnToBaseState(DriveState):
     def onLeave(self):
         super(ReturnToBaseState, self).onLeave()
         super(ReturnToBaseState, self).TimeDriveForward(3)
+        BaseState.goToState("RemoveSnowState")
         # Go to removeSnow
 
     def onUpdate(self, delta):
@@ -54,4 +55,4 @@ class ReturnToBaseState(DriveState):
             # Drive towards base
             self.DriveState.DriveState.TimeDriveForward(2)
             self.leftRight = 2
-            return
+            self.onLeave()

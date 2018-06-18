@@ -28,13 +28,13 @@ class BaseState(object):
         deltaGyro = self.gyro - self.robotData.gyroscope        # Take the difference between the current and previous values of the gyroscope
         if deltaGyro[0] + deltaGyro[1] + deltaGyro[2] > 100:
             # go to beingShakenState, as it's being jostled
-            return
+            self.goToState("ShakenState")
         if self.gyro[1] > 100:
             # go to beingPetState, as it's being picked up
-            return
+            self.goToState("BeingPetState")
         if self.robotData.arousal > 7:
             # go to AngeredState
-            return
+            self.goToState("AngeredState")
         self.gyro = self.robotData.gyroscope
         pass
 
@@ -42,4 +42,4 @@ class BaseState(object):
         self.gyro = self.robotData.gyroscope
         if self.gyro[1] > 100:
             # go to beingPetState, as it's being picked up
-            return
+            self.goToState("BeingPetState")

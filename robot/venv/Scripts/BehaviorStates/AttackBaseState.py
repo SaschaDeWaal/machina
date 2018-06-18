@@ -21,7 +21,7 @@ class AttackBaseState(DriveState):
         super(AttackBaseState, self).onLeave()
         #self.DriveState.DriveState.TimeDriveForward(3)
         super(AttackBaseState, self).TimeDriveForward(3)
-        # Go to wandering behaviour
+        BaseState.goToState("ReturnToBaseState")
 
     def onUpdate(self, delta):
         super(AttackBaseState, self).onUpdate(delta)
@@ -55,4 +55,3 @@ class AttackBaseState(DriveState):
         elif baseFound: # this should include an 'and' where it states there is white (snow) in sight
             super(AttackBaseState, self).TimeDriveForward(2)
             self.leftRight = 2
-            return
