@@ -28,6 +28,7 @@ class DriveState(BaseState):
         super(DriveState, self).onUpdate(delta)
         self.timer -= delta
         if not self.timer <= 0:
+            self.MotorBehaviour(0,0)
             if self.funcName == "TimeDriveForward":
                 self.TimeDriveForward()
             elif self.funcName == "TimeDriveBackward":

@@ -12,11 +12,13 @@ class RemoveSnowState(DriveState):
 
     def onEnter(self):
         super(RemoveSnowState, self).onEnter()
-        self.timer = 2
-        super(RemoveSnowState, self).TimeDriveForward()
+        super(RemoveSnowState, self).SetCurFunction(2, "TimeDriveForward", 0)
+        #self.timer = 2
+        #super(RemoveSnowState, self).TimeDriveForward()
 
     def onLeave(self):
         super(RemoveSnowState, self).onLeave()
+        BaseState.BaseState.goToState("AngeredState")
 
     def onUpdate(self, delta):
         super(RemoveSnowState, self).onUpdate(delta)
