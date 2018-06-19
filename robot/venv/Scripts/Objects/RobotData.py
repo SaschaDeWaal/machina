@@ -15,7 +15,8 @@ class RobotData:
         self.motorLeft = motorLeft
         self.motorRight = motorRight
         self.arduinoBridge = arduinoBridge
-        self.gyroscope = [0, 0, 0, 0, 0, 0]  # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
+        self.gyroscope = [0, 0, 0]              # and gyroscope for balance
+        self.accel = [0, 0, 0]                  # 3 numbers for acceleration in x,y,z direction
         self.timer = 5
         self.light = [0,0,0]
 
@@ -25,6 +26,17 @@ class RobotData:
         self.arousal = value
         self.capArousal()
 
+    def getGyro(self):
+        self.gyroscope = self.arduinoBridge.lastData["gyroscoop"]
+        return self.arduinoBridge.lastData["gyroscoop"]
+
+    def getAccel(self):
+        self.accel = self.arduinoBridge.lastData["accelerator"]
+        return self.arduinoBridge.lastData["accelerator"]
+
+    def getLight(self):
+        self.light = self.arduinoBridge.lastData["light"]
+        return self.arduinoBridge.lastData["light"]
 
     # Used to ensure arousal won't go above 10, or below 1.
     def capArousal(self):

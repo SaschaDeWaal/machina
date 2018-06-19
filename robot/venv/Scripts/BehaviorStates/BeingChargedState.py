@@ -1,5 +1,5 @@
 
-import BaseState
+from BaseState import BaseState
 import time
 
 class BeingChargedState(BaseState):

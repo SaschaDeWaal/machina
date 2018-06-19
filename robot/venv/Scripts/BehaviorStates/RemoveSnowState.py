@@ -1,7 +1,7 @@
 
 import BaseState
 import time
-import DriveState
+from DriveState import DriveState
 import random
 
 class RemoveSnowState(DriveState):
@@ -37,8 +37,8 @@ class RemoveSnowState(DriveState):
     Once snow is found, the robot drives forward for 2 seconds, followed by 2 back, and restarts the process again.
     """
     def lookAround(self):
-        gyro = self.robotData.gyroscope
-        curOrientation = gyro[5]        # Current orientation expressed in amount of degrees turned from initial orientation
+        gyro = self.robotData.getGyro()
+        curOrientation = gyro[2]        # Current orientation expressed in amount of degrees turned from initial orientation
         if self.leftRight == 2:
             self.leftRight = random.randint(0, 1)  # 0 if left, 1 if right
             if self.leftRight == 0:

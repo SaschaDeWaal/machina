@@ -3,6 +3,7 @@ from Objects.DriveMotor import DriveMotor
 from Objects.ArduinoBridge import ArduinoBridge
 from Objects.RobotData import RobotData
 from BehaviorManager import BehaviorManager
+import time
 
 # Create objects
 leftMotor = DriveMotor(35, 37)
@@ -15,7 +16,8 @@ behaviorManager = BehaviorManager(RobotData)
 behaviorManager.start()
 
 # wait on exit
-raw_input("Press Enter to exit")
+#raw_input("Press Enter to exit")
+time.sleep(15)
 
 #stop all threads
 arduinoBridge.stop()

@@ -6,20 +6,24 @@ class DriveMotor:
     """ This class can control one motor """
 
     def __init__(self, pinA, pinB):
-        self.pinA = pinA
-        self.pinB = pinB
-        self.currentSpeed = 0;
+		print "Init motor connected to pin " + str(pinA) + " and " + str(pinB)
+        
+		self.pinA = pinA
+		self.pinB = pinB
+		self.currentSpeed = 0;
 
-        GPIO.setwarnings(False)
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(pinA, GPIO.OUT)
-        GPIO.setup(pinB, GPIO.OUT)
+		GPIO.setwarnings(False)
+		GPIO.setmode(GPIO.BOARD)
+		GPIO.setup(pinA, GPIO.OUT)
+		GPIO.setup(pinB, GPIO.OUT)
 
-        GPIO.output(pinA, True)
-        GPIO.output(pinB, False)
+		GPIO.output(pinA, False)
+		GPIO.output(pinB, False)
 
-        #self.pwmA = GPIO.PWM(pinA, 100)
-        #self.pwmB = GPIO.PWM(pinB, 100)
+		#self.pwmA = GPIO.PWM(pinA, 100)
+		#self.pwmB = GPIO.PWM(pinB, 100)
+
+ 		self.stopMoving()
 
     def stopMoving(self):
         """ Stop moving this motor. This will set the speed of the motor to 0 """

@@ -119,15 +119,15 @@ void ReadSerial(){
     byte character = Serial.read();
 
     if(character == 49){
-      SetAllLights(100, 100, 0);
+      SetAllLights(50, 50, 0);
     }
 
     if(character == 50) {
-      SetAllLights(100, 0, 100);
+      SetAllLights(50, 0, 50);
     }
 
     if(character == 51) {
-      SetAllLights(0, 100, 100);
+      SetAllLights(0, 50, 50);
     }
 
     Serial.println(character);
@@ -144,17 +144,17 @@ void SetAllLights(int r, int g, int b) {
 //light animations
 void CalibrateWarningAnimation(){
   for(int amount = 0; amount < 3; amount++){
-    for(int i = 0; i < 100; i++){
+    for(int i = 0; i < 50; i++){
       SetAllLights(i, i, i);
       delay(5);
     }
   
-    for(int i = 100; i > 0; i--){
+    for(int i = 50; i > 0; i--){
       SetAllLights(i, i, i);
       delay(5);
     }
   }
-  for(int i = 0; i < 100; i++){
+  for(int i = 0; i < 50; i++){
      SetAllLights(i, i, i);
      delay(5);
   }
