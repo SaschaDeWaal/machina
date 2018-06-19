@@ -5,6 +5,7 @@ import time
 import numpy as np
 import time
 import msvcrt
+import ImageGrab
 
 """
 

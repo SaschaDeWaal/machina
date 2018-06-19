@@ -14,6 +14,9 @@ class DriveState(BaseState):
         self.drivingBck = False
         self.turning = False
 
+        self.funcName = ""              # Name of the function currently being executed
+        self.degsToTurn = 0             # Used by other classes to set how many degrees should be turned.
+
     def onEnter(self):
         super(DriveState, self).onEnter()
         self.timer = 2
@@ -21,9 +24,21 @@ class DriveState(BaseState):
     def onLeave(self):
         super(DriveState, self).onLeave()
 
+    """
+    Determines what function to execute depending on the passed on parameters in SetCurFunction, called in other states.
+    This given function will run for the given amount of time by changing self.timer.
+    """
     def onUpdate(self, delta):
         super(DriveState, self).onUpdate(delta)
         self.timer -= delta
+        if not self.timer <= 0:
+            self.MotorBehaviour(0,0)
+            if self.funcName == "TimeDriveForward":
+                self.TimeDriveForward()
+            elif self.funcName == "TimeDriveBackward":
+                self.TimeDriveBackward()
+            elif self.funcName == "TurnDegrees":
+                self.TurnDegrees(self.degsToTurn)
 
     """
     Function that takes the supposed directions and speeds for both motors to change.
@@ -66,6 +81,7 @@ class DriveState(BaseState):
         if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
             self.MotorBehaviour(0, 0)
             self.turning = False
+            self.timer = 0
         elif futureDegreesTurned < self._degreesTurned:
             self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal , 1000 + 1800 * self.robotData.arousal)
             self.turning = True
@@ -135,3 +151,9 @@ class DriveState(BaseState):
                 if stoptime < time.time():
                     self.MotorBehaviour(0, 0)
         """
+
+
+    def SetCurFunction(self, duration, funcName, degsToTurn):
+        self.timer = duration
+        self.funcName = funcName
+        self.degsToTurn = degsToTurn

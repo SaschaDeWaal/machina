@@ -3,10 +3,22 @@ import time
 
 from BehaviorStates.BaseState import BaseState
 from BehaviorStates.IdleState import IdleState
+from BehaviorStates.ShakenState import ShakenState
+from BehaviorStates.AngeredState import AngeredState
+from BehaviorStates.BeingPetState import BeingPetState
+from BehaviorStates.ReturnToBaseState import ReturnToBaseState
+from BehaviorStates.RemoveSnowState import RemoveSnowState
+from BehaviorStates.AttackBaseState import AttackBaseState
 
 states = {
     "IdleState": IdleState,
-    "BaseState": BaseState
+    "BaseState": BaseState,
+    "ShakenState": ShakenState,
+    "AngeredState": AngeredState,
+    "BeingPetState": BeingPetState,
+    "ReturnToBaseState": ReturnToBaseState,
+    "RemoveSnowState": RemoveSnowState,
+    "AttackBaseState": AttackBaseState
 }
 
 class BehaviorManager:

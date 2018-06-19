@@ -17,6 +17,7 @@ class RobotData:
         self.arduinoBridge = arduinoBridge
         self.gyroscope = [0, 0, 0, 0, 0, 0]  # 6 numbers; 3 for acceleration in x,y,z direction, and gyroscope for balance
         self.timer = 5
+        self.light = [0,0,0]
 
 
     # Setter for the arousal parameter.
@@ -33,6 +34,9 @@ class RobotData:
             self.arousal = 1
 
 
+    """
+    Handled in BeingPetState, but kept here inb4 it'll be necessary somehow
+    """
     # Function that should decrease arousal level depending on how long the robot is being pet
     def pettingEffect(self, timeStarted):
         # Something with a timer...?
