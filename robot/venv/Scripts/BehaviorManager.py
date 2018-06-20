@@ -24,6 +24,8 @@ states = {
 class BehaviorManager:
 
     def __init__(self, robotData):
+        print "Create behavior manager with default behavior 'IdleState'"
+
         self.robotData = robotData
         self.lastTime = time.time()
         self.active = False
