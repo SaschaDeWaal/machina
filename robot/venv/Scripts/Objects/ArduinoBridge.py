@@ -9,7 +9,7 @@ class ArduinoBridge:
 
     def __init__(self):
         self.ser = serial.Serial(port='/dev/ttyS0', baudrate=9600, timeout=5)
-        self.lastData = json.loads('{}')
+        self.lastData = json.loads('{"index":"1286","gyroscoop":[-90.00,90.00,-0.00],"accelerator":[-0.00,-0.00,-0.00],"temperature":"-76.33","battery":"1024","light":[240,238,238]}')
 
         self.open = True
         self.thread = Thread(target=self.arduinoConnection, args=())
@@ -19,10 +19,13 @@ class ArduinoBridge:
         print "start connection to arduino"
         while self.open:
             data = self.ser.readline()
-            #print(data)
+            print "baconeggsandcheeseontoastwithsriracha"
+            print(data)
             try:
                 if data[0] == "{":
                     self.lastData = json.loads(data)
+                    print "LASTDATA:"
+                    print self.lastData
             except:
                 pass
 

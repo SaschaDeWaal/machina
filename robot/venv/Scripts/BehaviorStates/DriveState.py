@@ -1,4 +1,4 @@
-import BaseState
+from BaseState import BaseState
 import time
 import random
 

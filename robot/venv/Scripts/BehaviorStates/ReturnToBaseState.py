@@ -1,6 +1,6 @@
 
-import BaseState
-import DriveState
+from BaseState import BaseState
+from DriveState import DriveState
 import time
 import random
 from thread import start_new_thread
@@ -23,7 +23,7 @@ class ReturnToBaseState(DriveState):
         #DriveState.timer = 3
         super(ReturnToBaseState, self).SetCurFunction(3, "TimeDriveForward", 0)
         #super(ReturnToBaseState, self).TimeDriveForward()
-        BaseState.BaseState.goToState(self, "RemoveSnowState")
+        BaseState.goToState(self, "RemoveSnowState")
         # Go to removeSnow
 
     def onUpdate(self, delta):
@@ -39,8 +39,8 @@ class ReturnToBaseState(DriveState):
     Makes the robot turn on the spot to look around its environment to see whether it can see its own base
     """
     def lookAround(self):
-        gyro = self.robotData.gyroscope
-        curOrientation = gyro[5]        # Current orientation expressed in amount of degrees turned from initial orientation
+        gyro = self.robotData.getGyro()
+        curOrientation = gyro[2]        # Current orientation expressed in amount of degrees turned from initial orientation
         if self.leftRight == 2:
             self.leftRight = random.randint(0, 1)  # 0 if left, 1 if right
             if self.leftRight == 0:

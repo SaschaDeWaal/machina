@@ -15,11 +15,13 @@ class DriveMotor:
         GPIO.setup(pinA, GPIO.OUT)
         GPIO.setup(pinB, GPIO.OUT)
 
-        GPIO.output(pinA, True)
+        GPIO.output(pinA, False)
         GPIO.output(pinB, False)
 
         #self.pwmA = GPIO.PWM(pinA, 100)
         #self.pwmB = GPIO.PWM(pinB, 100)
+
+        self.stopMoving()
 
     def stopMoving(self):
         """ Stop moving this motor. This will set the speed of the motor to 0 """

@@ -46,6 +46,7 @@ class BehaviorManager:
 
     def setState(self, new_state_name):
         """ Change the current behavior state """
+        print "left state: " + self.currentState.__str__()
         self.currentState.onLeave()
         self.currentState = states[new_state_name]()
         self.currentState.setRobotData(self.robotData)
