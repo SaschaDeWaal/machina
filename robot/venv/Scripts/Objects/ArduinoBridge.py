@@ -53,13 +53,13 @@ class ArduinoBridge:
     def arduinoConnection(self):
         while self.open:
             data = self.ser.readline()
-            print "Data: "
-            print(data)
+            #print "Data: "
+            #print(data)
             try:
                 if data[0] == "{":
                     self.lastData = json.loads(data)
-                    print "LASTDATA:"
-                    print self.lastData
+                    #print "LASTDATA:"
+                    #print self.lastData
             except:
                 pass
 

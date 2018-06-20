@@ -42,7 +42,8 @@ class ShakenState(DriveState):
     This causes the robot to speed up in that direction while driving in that direction, resulting in 'drunk' behaviour.
     """
     def shakyMoves(self, delta):
-        arMod = 800 * super(ShakenState, self).robotData.arousal   # Modifier to motor power based on robot's arousal
+        #arMod = 800 * super(DriveState, self).robotData.arousal   # Modifier to motor power based on robot's arousal
+        arMod = 800 * super(ShakenState, self).GetArousal()
         timeMod = 10000 * delta
         if self.randNum == 0:
             super(ShakenState, self).MotorBehaviour(1000 + arMod, 1000 + arMod + timeMod)
