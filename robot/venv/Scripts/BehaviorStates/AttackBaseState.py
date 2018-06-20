@@ -10,6 +10,7 @@ class AttackBaseState(DriveState):
         super(AttackBaseState, self).__init__()
         self.timer = 2
         self.leftRight = 2
+        self.stateName = "AttackBaseState"
 
 
     def onEnter(self):

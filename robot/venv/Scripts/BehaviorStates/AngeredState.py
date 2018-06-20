@@ -12,6 +12,7 @@ class AngeredState(DriveState):
     def __init__(self):
         super(AngeredState, self).__init__()
         self.timer = 2
+        self.stateName = "AngeredState"
 
     def onEnter(self):
         super(AngeredState, self).onEnter()

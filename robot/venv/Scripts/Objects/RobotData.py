@@ -58,3 +58,11 @@ class RobotData:
             # go to BeingPetState
         else:
             self.isBeingPetted = False
+
+    """
+    Function that takes the supposed directions and speeds for both motors to change.
+    A negative number indicates the motor should drive backward
+    """
+    def MotorBehaviour(self, speedLeft, speedRight):
+        self.motorLeft.setSpeed(speedLeft)
+        self.motorRight.setSpeed(speedRight)

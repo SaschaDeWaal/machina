@@ -10,6 +10,7 @@ class RemoveSnowState(DriveState):
         super(RemoveSnowState, self).__init__()
         self.timer = random.randrange(15, 60, 1)
         self.leftRight = 2
+        self.stateName = "RemoveSnowState"
 
     def onEnter(self):
         super(RemoveSnowState, self).onEnter()

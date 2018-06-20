@@ -17,6 +17,8 @@ class DriveState(BaseState):
         self.funcName = ""              # Name of the function currently being executed
         self.degsToTurn = 0             # Used by other classes to set how many degrees should be turned.
 
+        self.stateName = "DriveState"
+
     def onEnter(self):
         super(DriveState, self).onEnter()
         self.timer = 2

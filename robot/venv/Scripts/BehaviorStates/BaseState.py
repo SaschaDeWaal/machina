@@ -10,6 +10,7 @@ class BaseState(object):
         self.tempDel = 0
         self.deltaAccel = 0
         self.accel = [0,0,0]
+        self.stateName = "BaseState"
 
     def setRobotData(self, robotData):
         """ Set the robot data so the behavior can use and modify it. """
@@ -63,7 +64,7 @@ class BaseState(object):
             # go to beingPetState, as it's being picked up
             self.goToState("BeingPetState")
         #self.accel = self.robotData.accel
-        pass
+        #pass
 
     def DetermineNextState(self):
         self.gyro = self.robotData.gyroscope
