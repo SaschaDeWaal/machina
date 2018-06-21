@@ -27,7 +27,7 @@ class ArduinoBridge:
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(12, GPIO.OUT)
-        GPIO.output(12, True)
+        GPIO.output(12, False)
         time.sleep(1)
         GPIO.output(12, True)
         time.sleep(1)
@@ -71,8 +71,8 @@ class ArduinoBridge:
     def stop(self):
         """ Close the serial connection to the arduino """
         self.open = False
-        GPIO.output(12, False)
-        GPIO.output(12, False)
+        #GPIO.output(12, False)
+        #GPIO.output(12, False)
         self.ser.close()
 
     def setTeamColour(self, number):

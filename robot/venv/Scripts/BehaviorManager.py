@@ -64,4 +64,8 @@ class BehaviorManager:
             if self.currentState.nextBehavior is None:
                 self.currentState.onUpdate(delta)
             else:
-                self.setState(self.currentState.nextBehavior)
+                if not (self.currentState.stateName == self.currentState.nextBehavior):
+                    self.setState(self.currentState.nextBehavior)
+                else:
+                    self.currentState.onUpdate(delta)
+

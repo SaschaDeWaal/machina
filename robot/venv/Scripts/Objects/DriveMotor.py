@@ -36,6 +36,7 @@ class DriveMotor:
     def setSpeed(self, speed):
         """ Set the motor speed. A negative speed means it will drive backwards,
         a speed of 0 means that it will stop driving """
+        print "Set speed to: " + str(speed)
         if speed == 0:
             GPIO.output(self.pinA, False)
             GPIO.output(self.pinB, False)

@@ -56,10 +56,10 @@ class BaseState(object):
             self.tempDel = 0
             self.accel = self.robotData.getAccel()
             self.deltaAccel = self.CalcDeltaAccel()
-        if self.deltaAccel > 0.1:
-            self.deltaAccel = 0
+        #if self.deltaAccel > 0.1:
+        #    self.deltaAccel = 0
             # go to beingShakenState, as it's being jostled
-            self.goToState("ShakenState")
+        #    self.goToState("ShakenState")
         if self.accel[1] > 5:
             # go to beingPetState, as it's being picked up
             self.goToState("BeingPetState")
