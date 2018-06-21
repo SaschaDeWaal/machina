@@ -45,11 +45,11 @@ class BaseState(object):
         deltaGyro = self.CalcDeltaGyro()       # Take the difference between the current and previous values of the gyroscope
         self.tempDel += delta
         if self.tempDel > 0.5:
-            print "Self.accel" + ', '.join(str(f) for f in self.accel)
-            print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel()) + "\n"
+            #print "Self.accel" + ', '.join(str(f) for f in self.accel)
+            #print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel()) + "\n"
             self.deltaAccel = self.CalcDeltaAccel()
-            print "DeltaAccel: " + str(self.deltaAccel) + "\n"
-            if self.deltaAccel > 0.1:
+            #print "DeltaAccel: " + str(self.deltaAccel) + "\n"
+            if self.deltaAccel > 0.2:
                 self.accel = self.robotData.getAccel()
                 self.goToState("ShakenState")
             self.deltaAccel = 0

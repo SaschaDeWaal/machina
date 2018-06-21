@@ -30,7 +30,7 @@ class DriveMotor:
     def stopMoving(self):
         """ Stop moving this motor. This will set the speed of the motor to 0 """
 
-        self.setSpeed(0)
+        #self.setSpeed(0)
 
 
     def setSpeed(self, speed):
