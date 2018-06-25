@@ -17,7 +17,8 @@ behaviorManager.start()
 
 # wait on exit
 #raw_input("Press Enter to exit")
-time.sleep(15)
+time.sleep(20)
+print "stopped because there was a timer"
 
 #stop all threads
 arduinoBridge.stop()
