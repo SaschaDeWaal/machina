@@ -17,11 +17,8 @@ class DriveMotor:
 		GPIO.setup(pinA, GPIO.OUT)
 		GPIO.setup(pinB, GPIO.OUT)
 
-		GPIO.output(pinA, False)
-		GPIO.output(pinB, False)
-
-		#self.pwmA = GPIO.PWM(pinA, 100)
-		#self.pwmB = GPIO.PWM(pinB, 100)
+		self.pwmA = GPIO.PWM(pinA, 100)
+		self.pwmB = GPIO.PWM(pinB, 100)
 
  		self.stopMoving()
 
@@ -34,23 +31,17 @@ class DriveMotor:
         """ Set the motor speed. A negative speed means it will drive backwards,
         a speed of 0 means that it will stop driving """
         if speed == 0:
-            GPIO.output(self.pinA, False)
-            GPIO.output(self.pinB, False)
-            #self.pwmA.start(0)
-            #self.pwmB.start(0)
+            self.pwmA.start(0)
+            self.pwmB.start(0)
         else:
-            if speed > 0 and self.currentSpeed <= 0:
-                GPIO.output(self.pinA, True)
-                GPIO.output(self.pinB, False)
-                #self.pwmA.start(1)
-                #self.pwmB.start(0)
-            if speed < 0 and self.currentSpeed >= 0:
-                GPIO.output(self.pinA, False)
-                GPIO.output(self.pinB, True)
-                #self.pwmA.start(0)
-                #self.pwmB.start(1)
+            if speed > 0:
+                self.pwmA.start(1)
+                self.pwmB.start(0)
+            if speed < 0:
+                self.pwmA.start(0)
+                self.pwmB.start(1)
 
-            print (math.fabs(speed))
-            #self.pwmA.ChangeFrequency(math.fabs(speed))
-            #self.pwmB.ChangeFrequency(math.fabs(speed))
+            self.pwmA.ChangeFrequency(math.fabs(speed * 1000000))
+            self.pwmB.ChangeFrequency(math.fabs(speed * 1000000))
             self.currentSpeed = speed
+            time.sleep(0.5)

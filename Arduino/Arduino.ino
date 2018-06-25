@@ -17,6 +17,8 @@ int index = 0;
 int sensorUpdate = 0;
 String msgContent = "";
 
+int maxPower = 50;
+
 int lightVoltage1[] = {0,0};
 int lightVoltage2[] = {0,0};
 int lightVoltage3[] = {0,0};  
@@ -27,10 +29,8 @@ MPU6050 mpu6050(Wire);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(numberOfNeoPixels, pinNeoPixels, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  
-  pixels.begin();
-  CalibrateWarningAnimation();
-  
+ 
+  pixels.begin();  
   Serial.begin(9600);
   
   Wire.begin();
@@ -62,9 +62,9 @@ String CreateJson(int messageIndex){
   int light2 = analogRead(pinLight2);
   int light3 = analogRead(pinLight3);
   
-  String lightValue1 = String(analogRead(pinLight1));//(light1 < lightVoltage1[0] || light1 > lightVoltage1[1]) ? "false" : "true";//String(analogRead(pinLight1));
-  String lightValue2 = (light2 < lightVoltage2[0] || light2 > lightVoltage2[1]) ? "false" : "true";//String(analogRead(pinLight2));
-  String lightValue3 = (light3 < lightVoltage3[0] || light3 > lightVoltage3[1]) ? "false" : "true";//String(analogRead(pinLight3));
+  String lightValue1 = String(analogRead(pinLight1));;//(light1 < lightVoltage1[0] || light1 > lightVoltage1[1]) ? "false" : "true";//String(analogRead(pinLight1));
+  String lightValue2 = String(analogRead(pinLight2));//(light2 < lightVoltage2[0] || light2 > lightVoltage2[1]) ? "false" : "true";//String(analogRead(pinLight2));
+  String lightValue3 = String(analogRead(pinLight3));//(light3 < lightVoltage3[0] || light3 > lightVoltage3[1]) ? "false" : "true";//String(analogRead(pinLight3));
 
   String batteryValue = String(analogRead(batteryPin));
 
@@ -101,7 +101,7 @@ void CalibrateLight() {
     lightVoltage1[0] += analogRead(pinLight1);
     lightVoltage2[0] += analogRead(pinLight2);
     lightVoltage3[0] += analogRead(pinLight3);
-    delay(100);
+    delay(50);
   }
 
   lightVoltage1[1] = (lightVoltage1[0] / precision) * ( 1 + lightSensitive);
@@ -119,15 +119,15 @@ void ReadSerial(){
     byte character = Serial.read();
 
     if(character == 49){
-      SetAllLights(50, 50, 0);
+      SetAllLights(maxPower, maxPower, 0);
     }
 
     if(character == 50) {
-      SetAllLights(50, 0, 50);
+      SetAllLights(maxPower, 0, maxPower);
     }
 
     if(character == 51) {
-      SetAllLights(0, 50, 50);
+      SetAllLights(0, maxPower, maxPower);
     }
 
     Serial.println(character);
@@ -135,27 +135,33 @@ void ReadSerial(){
 }
 
 void SetAllLights(int r, int g, int b) {
-  for(int i=0;i<numberOfNeoPixels;i++){
+  /*for(int i=0;i<numberOfNeoPixels;i++){
     pixels.setPixelColor(i, pixels.Color(r, g, b));
-  }
+  }*/
+  pixels.setPixelColor(0, pixels.Color(r, g, b));
+  pixels.setPixelColor(2, pixels.Color(r, g, b));
+  pixels.setPixelColor(4, pixels.Color(r, g, b));
+  pixels.setPixelColor(10, pixels.Color(r, g, b));
+  pixels.setPixelColor(17, pixels.Color(r, g, b));
+  
   pixels.show();
 }
 
 //light animations
 void CalibrateWarningAnimation(){
   for(int amount = 0; amount < 3; amount++){
-    for(int i = 0; i < 50; i++){
-      SetAllLights(i, i, i);
+    for(int i = 0; i < maxPower; i++){
+      SetAllLights(i, 0, 0);
       delay(5);
     }
   
-    for(int i = 50; i > 0; i--){
-      SetAllLights(i, i, i);
+    for(int i = maxPower; i > 0; i--){
+      SetAllLights(i, 0, 0);
       delay(5);
     }
   }
-  for(int i = 0; i < 50; i++){
-     SetAllLights(i, i, i);
+  for(int i = 0; i < maxPower; i++){
+     SetAllLights(i, 0, 0);
      delay(5);
   }
 }

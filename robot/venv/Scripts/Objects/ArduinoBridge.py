@@ -20,13 +20,13 @@ class ArduinoBridge:
 		GPIO.setmode(GPIO.BOARD)
 		GPIO.setup(12, GPIO.OUT)
 		GPIO.output(12, False)
-		time.sleep(1)
+		time.sleep(0.5)
 		GPIO.output(12, True)
-		time.sleep(1);
+		time.sleep(1)
 		
 		print "Waiting on first msg from the arduino (arduino needs to calibrate the sensors first)"
 		
-		arduinoIsDone = False;
+		arduinoIsDone = False
 		while(arduinoIsDone == False):
 			data = self.ser.readline()
 			try:
@@ -42,15 +42,14 @@ class ArduinoBridge:
 		self.thread = Thread(target=self.arduinoConnection, args=())
 		self.thread.start()
 		
-		
 
     def arduinoConnection(self):
         while self.open:
-            data = self.ser.readline()
             try:
+                data = self.ser.readline()
+                print "receive from arduino: " + data
                 if data[0] == "{":
                     self.lastData = json.loads(data)
-                    print self.lastData
             except:
                 pass
 
@@ -66,8 +65,8 @@ class ArduinoBridge:
 
     def setTeamColour(self, number):
         if number == 0:
-            self.send('1')
+            self.send('set color 1')
         if number == 1:
-            self.send('2')
+            self.send('set color 2')
         if number == 2:
-            self.send('3')
+            self.send('set color 3')
