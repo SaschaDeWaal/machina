@@ -69,6 +69,8 @@ class ArduinoBridge:
     def stop(self):
         """ Close the serial connection to the arduino """
         self.open = False
+        #GPIO.output(12, False)
+        #GPIO.output(12, False)
         self.ser.close()
 
     def setTeamColour(self, number):

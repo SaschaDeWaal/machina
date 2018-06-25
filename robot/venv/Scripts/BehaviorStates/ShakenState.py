@@ -8,11 +8,13 @@ class ShakenState(DriveState):
 
     def __init__(self):
         super(ShakenState, self).__init__()
-        self.timer = 2
+        self.timer = round(random.uniform(1, 4), 1)
         self.randNum = random.randrange(0, 7, 1)
+        self.stateName = "ShakenState"
 
     def onEnter(self):
         super(ShakenState, self).onEnter()
+        self.timer = round(random.uniform(1, 4), 1)
         self.randNum = random.randrange(0, 7, 1)
 
     def onLeave(self):
@@ -29,7 +31,7 @@ class ShakenState(DriveState):
         super(ShakenState, self).onUpdate(delta)
         self.timer -= delta
         if self.timer <= 0:
-            self.timer = random.randrange(1, 4, 0.5)
+            self.timer = round(random.uniform(1,4), 1)
             self.randNum = random.randrange(0, 7, 1)
         self.shakyMoves(delta)
 
@@ -42,21 +44,47 @@ class ShakenState(DriveState):
     This causes the robot to speed up in that direction while driving in that direction, resulting in 'drunk' behaviour.
     """
     def shakyMoves(self, delta):
-        arMod = 800 * super(ShakenState, self).robotData.arousal   # Modifier to motor power based on robot's arousal
+        print "RandNum: " + str(self.randNum)
+        #arMod = 800 * super(DriveState, self).robotData.arousal   # Modifier to motor power based on robot's arousal
+        arMod = 800 * super(ShakenState, self).GetArousal()
         timeMod = 10000 * delta
         if self.randNum == 0:
-            super(ShakenState, self).MotorBehaviour(1000 + arMod, 1000 + arMod + timeMod)
+            #super(ShakenState, self).MotorBehaviour(1000 + arMod, 1000 + arMod + timeMod)                  # used these initially
+            #self.robotData.MotorBehaviour(1000 + arMod, 1000 + arMod + timeMod)
+            self.robotData.motorLeft.setSpeed(1000 + arMod)
+            self.robotData.motorRight.setSpeed(1000 + arMod + timeMod)
         elif self.randNum == 1:
-            super(ShakenState, self).MotorBehaviour(1000 + arMod + timeMod, 1000 + arMod)
+            #super(ShakenState, self).MotorBehaviour(1000 + arMod + timeMod, 1000 + arMod)
+            #self.robotData.MotorBehaviour(1000 + arMod + timeMod, 1000 + arMod)
+            self.robotData.motorLeft.setSpeed(1000 + arMod + timeMod)
+            self.robotData.motorRight.setSpeed(1000 + arMod)
         elif self.randNum == 2:
-            super(ShakenState, self).MotorBehaviour(1000 + arMod, -1000 - arMod - timeMod)
+            #super(ShakenState, self).MotorBehaviour(1000 + arMod, -1000 - arMod - timeMod)
+            #self.robotData.MotorBehaviour(1000 + arMod, -1000 - arMod - timeMod)
+            self.robotData.motorLeft.setSpeed(1000 + arMod)
+            self.robotData.motorRight.setSpeed(-1000 - arMod - timeMod)
         elif self.randNum == 3:
-            super(ShakenState, self).MotorBehaviour(1000 + arMod + timeMod, -1000 - arMod)
+            #super(ShakenState, self).MotorBehaviour(1000 + arMod + timeMod, -1000 - arMod)
+            #self.robotData.MotorBehaviour(1000 + arMod + timeMod, -1000 - arMod)
+            self.robotData.motorLeft.setSpeed(1000 + arMod + timeMod)
+            self.robotData.motorRight.setSpeed(-1000 - arMod)
         elif self.randNum == 4:
-            super(ShakenState, self).MotorBehaviour(-1000 - arMod, 1000 + arMod + timeMod)
+            #super(ShakenState, self).MotorBehaviour(-1000 - arMod, 1000 + arMod + timeMod)
+            #self.robotData.MotorBehaviour(-1000 - arMod, 1000 + arMod + timeMod)
+            self.robotData.motorLeft.setSpeed(-1000 - arMod)
+            self.robotData.motorRight.setSpeed(1000 + arMod + timeMod)
         elif self.randNum == 5:
-            super(ShakenState, self).MotorBehaviour(-1000 - arMod - timeMod, 1000 + arMod)
+            #super(ShakenState, self).MotorBehaviour(-1000 - arMod - timeMod, 1000 + arMod)
+            #self.robotData.MotorBehaviour(-1000 - arMod - timeMod, 1000 + arMod)
+            self.robotData.motorLeft.setSpeed(-1000 - arMod - timeMod)
+            self.robotData.motorRight.setSpeed(1000 + arMod)
         elif self.randNum == 6:
-            super(ShakenState, self).MotorBehaviour(-1000 - arMod, -1000 - arMod - timeMod)
+            #super(ShakenState, self).MotorBehaviour(-1000 - arMod, -1000 - arMod - timeMod)
+            #self.robotData.MotorBehaviour(-1000 - arMod, -1000 - arMod - timeMod)
+            self.robotData.motorLeft.setSpeed(-1000 - arMod)
+            self.robotData.motorRight.setSpeed(-1000 - arMod - timeMod)
         elif self.randNum == 7:
-            super(ShakenState, self).MotorBehaviour(-1000 - arMod - timeMod, -1000 - arMod)
+            #super(ShakenState, self).MotorBehaviour(-1000 - arMod - timeMod, -1000 - arMod)
+            #self.robotData.MotorBehaviour(-1000 - arMod - timeMod, -1000 - arMod)
+            self.robotData.motorLeft.setSpeed(-1000 - arMod - timeMod)
+            self.robotData.motorRight.setSpeed(-1000 - arMod)

@@ -8,6 +8,7 @@ class BeingPetState(BaseState):
         super(BeingPetState, self).__init__()
         self.timer = 3
         self.beingPet = False
+        self.stateName = "BeingPetState"
 
     def onEnter(self):
         super(BeingPetState, self).onEnter()

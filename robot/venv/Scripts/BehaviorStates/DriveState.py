@@ -7,7 +7,7 @@ class DriveState(BaseState):
     def __init__(self):
         super(DriveState, self).__init__()
         self.timer = 2
-        self._degreesTurned = 0         # The amount of degrees the robot is turned, from 0 to 360.
+        self.degreesTurned = 0         # The amount of degrees the robot is turned, from 0 to 360.
                                         # It should be ensured this is relative to the gyroscope input
                                         # e.g. the initial orientation should be equal to 0 degrees.
         self.drivingFwd = False
@@ -17,12 +17,18 @@ class DriveState(BaseState):
         self.funcName = ""              # Name of the function currently being executed
         self.degsToTurn = 0             # Used by other classes to set how many degrees should be turned.
 
+        self.stateName = "DriveState"
+
     def onEnter(self):
         super(DriveState, self).onEnter()
         self.timer = 2
+        self.degreesTurned = 0
+        self.funcName = ""              # Name of the function currently being executed
+        self.degsToTurn = 0             # Used by other classes to set how many degrees should be turned.
 
     def onLeave(self):
         super(DriveState, self).onLeave()
+        super(DriveState, self).goToState("BaseState")
 
     """
     Determines what function to execute depending on the passed on parameters in SetCurFunction, called in other states.
@@ -32,13 +38,14 @@ class DriveState(BaseState):
         super(DriveState, self).onUpdate(delta)
         self.timer -= delta
         if not self.timer <= 0:
-            self.MotorBehaviour(0,0)
             if self.funcName == "TimeDriveForward":
                 self.TimeDriveForward()
             elif self.funcName == "TimeDriveBackward":
                 self.TimeDriveBackward()
             elif self.funcName == "TurnDegrees":
                 self.TurnDegrees(self.degsToTurn)
+        elif self.timer <= 0:
+            self.MotorBehaviour(0, 0)
 
     """
     Function that takes the supposed directions and speeds for both motors to change.
@@ -78,14 +85,14 @@ class DriveState(BaseState):
         pass
 
     def TurnDegrees(self, futureDegreesTurned):
-        if futureDegreesTurned-3 <= self._degreesTurned <= futureDegreesTurned+3:
+        if futureDegreesTurned-3 <= self.degreesTurned <= futureDegreesTurned+3:
             self.MotorBehaviour(0, 0)
             self.turning = False
             self.timer = 0
-        elif futureDegreesTurned < self._degreesTurned:
+        elif futureDegreesTurned < self.degreesTurned:
             self.MotorBehaviour(-1000 - 1800 * self.robotData.arousal , 1000 + 1800 * self.robotData.arousal)
             self.turning = True
-        elif futureDegreesTurned > self._degreesTurned:
+        elif futureDegreesTurned > self.degreesTurned:
             self.MotorBehaviour(1000 + 1800 * self.robotData.arousal, -1000 - 1800 * self.robotData.arousal)
             self.turning = True
         """
@@ -152,8 +159,10 @@ class DriveState(BaseState):
                     self.MotorBehaviour(0, 0)
         """
 
-
     def SetCurFunction(self, duration, funcName, degsToTurn):
         self.timer = duration
         self.funcName = funcName
         self.degsToTurn = degsToTurn
+
+    def GetDegsTurned(self):
+        return self.degreesTurned

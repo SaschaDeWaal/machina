@@ -16,8 +16,8 @@ behaviorManager = BehaviorManager(RobotData)
 behaviorManager.start()
 
 # wait on exit
-#raw_input("Press Enter to exit")
-time.sleep(15)
+raw_input("Press Enter to exit")
+#time.sleep(30)
 
 #stop all threads
 arduinoBridge.stop()

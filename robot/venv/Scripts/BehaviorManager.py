@@ -48,13 +48,13 @@ class BehaviorManager:
 
     def setState(self, new_state_name):
         """ Change the current behavior state """
-        print "left state: " + self.currentState.__str__()
-        self.currentState.onLeave()
-        self.currentState = states[new_state_name]()
-        self.currentState.setRobotData(self.robotData)
-        self.currentState.onEnter()
-
-        print "enter new state: '" + new_state_name + "'"
+        if not (self.currentState.stateName == new_state_name):       # Ensuring the same state can't be entered while in that state
+            print "left state: " + self.currentState.stateName
+            self.currentState.onLeave()
+            self.currentState = states[new_state_name]()
+            self.currentState.setRobotData(self.robotData)
+            self.currentState.onEnter()
+            print "enter new state: '" + new_state_name + "'"
 
     def loop(self):
         while self.active:
@@ -64,4 +64,8 @@ class BehaviorManager:
             if self.currentState.nextBehavior is None:
                 self.currentState.onUpdate(delta)
             else:
-                self.setState(self.currentState.nextBehavior)
+                if not (self.currentState.stateName == self.currentState.nextBehavior):
+                    self.setState(self.currentState.nextBehavior)
+                else:
+                    self.currentState.onUpdate(delta)
+

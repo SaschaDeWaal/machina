@@ -11,6 +11,7 @@ class ReturnToBaseState(DriveState):
         super(ReturnToBaseState, self).__init__()
         self.timer = 2
         self.leftRight = 2
+        self.stateName = "ReturnToBaseState"
 
     def onEnter(self):
         super(ReturnToBaseState, self).onEnter()

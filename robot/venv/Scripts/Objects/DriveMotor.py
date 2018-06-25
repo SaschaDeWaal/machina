@@ -24,12 +24,13 @@ class DriveMotor:
     def stopMoving(self):
         """ Stop moving this motor. This will set the speed of the motor to 0 """
 
-        self.setSpeed(0)
+        #self.setSpeed(0)
 
 
     def setSpeed(self, speed):
         """ Set the motor speed. A negative speed means it will drive backwards,
         a speed of 0 means that it will stop driving """
+        print "Set speed to: " + str(speed)
         if speed == 0:
             self.pwmA.start(0)
             self.pwmB.start(0)
