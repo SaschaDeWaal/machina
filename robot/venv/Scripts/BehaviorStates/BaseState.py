@@ -32,13 +32,13 @@ class BaseState(object):
     def onUpdate(self, delta):
         """ Called every frame """
         randInt = random.randrange(1, 50, 1)
-        #print "gyroscope:" + ', '.join(str(f) for f in self.robotData.getGyro())
-        #print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel())
+        print "gyroscope:" + ', '.join(str(f) for f in self.robotData.getGyro())
+        print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel())
         if randInt == 42 and self.robotData.arousal > 6:
             self.goToState("AngeredState")
         deltaGyro = self.CalcDeltaGyro()       # Take the difference between the current and previous values of the gyroscope
         deltaAccel = self.CalcDeltaAccel()
-        #print "DeltaAccel: " + str(deltaAccel)
+        print "DeltaAccel: " + str(deltaAccel)
         if deltaAccel > 100:
             # go to beingShakenState, as it's being jostled
             self.goToState("ShakenState")

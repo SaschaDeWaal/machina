@@ -2,30 +2,30 @@ import RPi.GPIO as GPIO
 import time
 import math
 
+
 class DriveMotor:
     """ This class can control one motor """
 
     def __init__(self, pinA, pinB):
-		print "Init motor connected to pin " + str(pinA) + " and " + str(pinB)
-        
-		self.pinA = pinA
-		self.pinB = pinB
-		self.currentSpeed = 0;
+        print "Init motor connected to pin " + str(pinA) + " and " + str(pinB)
 
-		GPIO.setwarnings(False)
-		GPIO.setmode(GPIO.BOARD)
-		GPIO.setup(pinA, GPIO.OUT)
-		GPIO.setup(pinB, GPIO.OUT)
+        self.pinA = pinA
+        self.pinB = pinB
+        self.currentSpeed = 0
 
 		self.pwmA = GPIO.PWM(pinA, 100)
 		self.pwmB = GPIO.PWM(pinB, 100)
 
  		self.stopMoving()
 
+        self.stopMoving()
+
+
     def stopMoving(self):
         """ Stop moving this motor. This will set the speed of the motor to 0 """
 
         self.setSpeed(0)
+
 
     def setSpeed(self, speed):
         """ Set the motor speed. A negative speed means it will drive backwards,

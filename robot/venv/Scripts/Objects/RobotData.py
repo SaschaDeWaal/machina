@@ -27,6 +27,7 @@ class RobotData:
         self.capArousal()
 
     def getGyro(self):
+        print self.arduinoBridge.lastData["gyroscoop"]
         self.gyroscope = self.arduinoBridge.lastData["gyroscoop"]
         return self.arduinoBridge.lastData["gyroscoop"]
 
