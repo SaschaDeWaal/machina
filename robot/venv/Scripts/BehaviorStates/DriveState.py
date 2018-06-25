@@ -44,6 +44,8 @@ class DriveState(BaseState):
                 self.TimeDriveBackward()
             elif self.funcName == "TurnDegrees":
                 self.TurnDegrees(self.degsToTurn)
+            else:
+                self.RandomMove()
         elif self.timer <= 0:
             self.MotorBehaviour(0, 0)
 
@@ -61,18 +63,25 @@ class DriveState(BaseState):
     random alignment, all with a chance of 1 in 3.
     """
     def RandomMove(self):
+        print "performing random move"
         randNum = random.randint(0, 2)
         curTime = time.time()
         duration = random.randrange(1, 3, 0.25)
         #stopTime = curTime + duration
         self.timer = duration
         if randNum == 0:
-            self.TimeDriveForward()
+            #self.TimeDriveForward()
+            self.funcName = "TimeDriveForward"
+            self.timer = round(random.uniform(0.5, 2),1)
         elif randNum == 1:
-            self.TimeDriveBackward()
+            #self.TimeDriveBackward()
+            self.funcName = "TimeDriveBackward"
+            self.timer = round(random.uniform(0.5, 2),1)
         elif randNum == 2:
             degreesToTurnTo = random.randrange(0, 359, 1)
-            self.TurnDegrees(degreesToTurnTo)
+            #self.TurnDegrees(degreesToTurnTo)
+            self.funcName = "TurnDegrees"
+            self.timer = round(random.uniform(0.25, 2),2)
 
 
     """

@@ -1,5 +1,5 @@
 import time
-
+import random
 
 class RobotData:
     """ Here we can store data of the robot. This can be used and modified by the behaviours."""
@@ -19,7 +19,7 @@ class RobotData:
         self.accel = [0, 0, 0]                  # 3 numbers for acceleration in x,y,z direction
         self.timer = 5
         self.light = [0,0,0]
-
+        self.teamCol = random.randrange(0,2,1)
 
     # Setter for the arousal parameter.
     def setArousal(self, value):

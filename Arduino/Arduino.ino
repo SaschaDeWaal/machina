@@ -17,7 +17,7 @@ int index = 0;
 int sensorUpdate = 0;
 String msgContent = "";
 
-int maxPower = 50;
+int maxPower = 80;
 
 int lightVoltage1[] = {0,0};
 int lightVoltage2[] = {0,0};
@@ -130,6 +130,30 @@ void ReadSerial(){
       SetAllLights(0, maxPower, maxPower);
     }
 
+    if(character == 52) {
+      SetAllLights(maxPower, 0, 0);
+    }
+
+    if(character == 53) {
+      SetAllLights(0, maxPower, 0);
+    }
+
+    if(character == 54) {
+      SetAllLights(0, 0, maxPower);
+    }
+
+    if(character == 55) {
+      SetAllLights(maxPower, maxPower/2, 0);
+    }
+
+    if(character == 56) {
+      SetAllLights(maxPower/2, maxPower, maxPower/4);
+    }
+    
+    if(character == 57) {
+      SetAllLights(maxPower/2, maxPower/4, maxPower);
+    }
+
     Serial.println(character);
   }
 }
@@ -141,8 +165,10 @@ void SetAllLights(int r, int g, int b) {
   pixels.setPixelColor(0, pixels.Color(r, g, b));
   pixels.setPixelColor(2, pixels.Color(r, g, b));
   pixels.setPixelColor(4, pixels.Color(r, g, b));
-  pixels.setPixelColor(10, pixels.Color(r, g, b));
-  pixels.setPixelColor(17, pixels.Color(r, g, b));
+  pixels.setPixelColor(9, pixels.Color(r, g, b));
+  pixels.setPixelColor(11, pixels.Color(r, g, b));
+  pixels.setPixelColor(16, pixels.Color(r, g, b));
+  pixels.setPixelColor(18, pixels.Color(r, g, b));
   
   pixels.show();
 }

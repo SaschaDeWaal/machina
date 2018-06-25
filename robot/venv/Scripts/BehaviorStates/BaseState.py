@@ -88,3 +88,4 @@ class BaseState(object):
 
     def GetArousal(self):
         return self.robotData.arousal
+
