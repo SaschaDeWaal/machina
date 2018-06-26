@@ -18,6 +18,7 @@ behaviorManager.start()
 
 # wait on exit
 raw_input("Press Enter to exit")
+arduinoBridge.setTeamColour(RobotData.teamCol)
 #time.sleep(30)
 
 #stop all threads

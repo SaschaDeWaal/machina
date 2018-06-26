@@ -11,15 +11,15 @@ class ShakenState(DriveState):
         self.timer = round(random.uniform(1, 4), 1)
         self.randNum = random.randrange(0, 7, 1)
         self.stateName = "ShakenState"
-        self.colourTimer = 0.5
-        self.shakenTimer = 10
+        self.colourTimer = 0.25
+        self.shakenTimer = random.uniform(10,15)
 
     def onEnter(self):
         super(ShakenState, self).onEnter()
         self.timer = round(random.uniform(1, 4), 1)
         self.randNum = random.randrange(0, 7, 1)
-        self.colourTimer = 0.5
-        self.shakenTimer = 10
+        self.colourTimer = 0.25
+        self.shakenTimer = random.uniform(10,15)
 
     def onLeave(self):
         teamCol = self.robotData.teamCol
@@ -42,12 +42,12 @@ class ShakenState(DriveState):
         self.timer -= delta
         self.colourTimer -= delta
         if self.colourTimer <= 0:
-            self.colourTimer = round(random.uniform(0.25,1), 1)
+            self.colourTimer = round(random.uniform(0.25, 5), 1)
             randCol = random.randint(0,8)
             self.robotData.arduinoBridge.setTeamColour(randCol)
         if self.timer <= 0:
             self.timer = round(random.uniform(1,4), 1)
-            self.randNum = random.randrange(0, 7, 1)
+            self.randNum = random.randint(0,7)
         self.shakyMoves(delta)
 
 

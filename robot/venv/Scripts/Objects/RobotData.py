@@ -19,7 +19,9 @@ class RobotData:
         self.accel = [0, 0, 0]                  # 3 numbers for acceleration in x,y,z direction
         self.timer = 5
         self.light = [0,0,0]
-        self.teamCol = random.randrange(0,2,1)
+        #self.teamCol = random.randint(0,2)
+        self.teamCol = 2
+        self.arduinoBridge.setTeamColour(self.teamCol)
 
     # Setter for the arousal parameter.
     def setArousal(self, value):

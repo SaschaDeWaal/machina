@@ -12,6 +12,7 @@ class BaseState(object):
         self.deltaGyro = 0
         self.accel = [0,0,0]
         self.stateName = "BaseState"
+        self.randLimitDrive = 0
 
     def setRobotData(self, robotData):
         """ Set the robot data so the behavior can use and modify it. """
@@ -21,6 +22,7 @@ class BaseState(object):
         self.deltaGyro = 0
         self.tempDel = 0
         self.deltaAccel = 0
+        self.randLimitDrive = 0
 
     def goToState(self, newState):
         """ call this to tell the system this behaviour has failed """
@@ -28,6 +30,7 @@ class BaseState(object):
 
     def onEnter(self):
         """ Called when this behavior starts """
+        self.tempDel = random.uniform(10,15)
         pass
 
     def onLeave(self):
@@ -39,32 +42,46 @@ class BaseState(object):
     """
     def onUpdate(self, delta):
         """ Called every frame """
+        if self.tempDel <= 0 and self.stateName == "DriveState":
+            #self.tempDel = random.uniform(10,15)
+            randChoice = random.randint(0,1)
+            if randChoice == 0:
+                BaseState.goToState(self, "ShakenState")
+                #pass
+            elif randChoice == 1:
+                BaseState.goToState(self, "AngeredState")
+        self.tempDel -= delta
 
+        """
         randInt = random.randrange(1, 50, 1)
-        print "gyroscope:" + ', '.join(str(f) for f in self.robotData.getGyro())
-        #print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel()) + "\n"
+        #print "gyroscope:" + ', '.join(str(f) for f in self.robotData.getGyro())
+        #print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel())
+        #print "lights" + ', '.join(str(f) for f in self.robotData.getLight())
         if randInt == 42 and self.robotData.arousal > 6:
             self.goToState("AngeredState")
         #deltaGyro = self.CalcDeltaGyro()       # Take the difference between the current and previous values of the gyroscope
         #print "Self.gyro" + ', '.join(str(f) for f in self.gyro)
+        print self.deltaAccel
+        print self.accel
+        print "\n"
         self.tempDel += delta
         if self.tempDel > 0.5:
             print self.stateName
-            #print "dA before: " + str(self.deltaAccel)
-            #print "Self.accel" + ', '.join(str(f) for f in self.accel)
+            print "dA before: " + str(self.deltaAccel)
+            print "Self.accel" + ', '.join(str(f) for f in self.accel)
             #print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel()) + "\n"
             self.deltaGyro = self.CalcDeltaGyro()
             self.deltaAccel = self.CalcDeltaAccel()
-            print "dG: " + str(self.deltaGyro)
+            #print "dG: " + str(self.deltaGyro)
             #print "Self.gyro" + ', '.join(str(f) for f in self.gyro)
-            #print "dA after: " + str(self.deltaAccel)
+            print "dA after: " + str(self.deltaAccel)
             #print "DeltaAccel: " + str(self.deltaAccel) + "\n"
-            #if self.deltaAccel > 0.3:
-            if self.deltaGyro > 15:
+            if self.deltaAccel > 0.3:
+            #if self.deltaGyro > 15:
                 self.accel = self.robotData.getAccel()
                 self.gyro = self.robotData.getGyro()
                 self.goToState("ShakenState")
-            self.deltaAccel = 0
+            #self.deltaAccel = 0
             #self.deltaGyro = 0
             self.tempDel = 0
             self.accel = self.robotData.getAccel()
@@ -80,6 +97,7 @@ class BaseState(object):
             self.goToState("BeingPetState")
         #self.accel = self.robotData.accel
         #pass
+        """
 
     def DetermineNextState(self):
         self.gyro = self.robotData.gyroscope

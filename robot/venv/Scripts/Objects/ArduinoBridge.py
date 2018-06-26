@@ -80,20 +80,20 @@ class ArduinoBridge:
 
     def setTeamColour(self, number):
         if number == 0:
-            self.send('0')
-        if number == 1:
             self.send('1')
-        if number == 2:
+        if number == 1:
             self.send('2')
-        if number == 3:
+        if number == 2:
             self.send('3')
-        if number == 4:
+        if number == 3:
             self.send('4')
-        if number == 5:
+        if number == 4:
             self.send('5')
-        if number == 6:
+        if number == 5:
             self.send('6')
-        if number == 7:
+        if number == 6:
             self.send('7')
-        if number == 8:
+        if number == 7:
             self.send('8')
+        if number == 8:
+            self.send('9')

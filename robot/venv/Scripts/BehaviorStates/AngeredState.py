@@ -6,22 +6,27 @@ Also 'challenges' other robots when coming across them
 from BaseState import BaseState
 import time
 from DriveState import DriveState
+import random
 
 class AngeredState(DriveState):
 
     def __init__(self):
         super(AngeredState, self).__init__()
-        self.timer = 200
+        self.timer = random.uniform(10, 15)
         self.stateName = "AngeredState"
+        random.uniform(10, 15)
+        self.angerTime = random.uniform(10, 15)
 
     def onEnter(self):
         super(AngeredState, self).onEnter()
-
-        self.timer = 30
+        self.robotData.arduinoBridge.setTeamColour(3)           # Takes on red colour
+        self.timer = random.uniform(10, 15)
+        self.angerTime = random.uniform(10, 15)
         self.AngerMovement()
         #self.onLeave()
 
     def onLeave(self):
+        self.robotData.arduinoBridge.setTeamColour(self.robotData.teamCol)
         super(AngeredState, self).onLeave()
         #super(AngeredState, self).goToState("BaseState")
         BaseState.goToState(self, "DriveState")
@@ -29,7 +34,10 @@ class AngeredState(DriveState):
     def onUpdate(self, delta):
         super(AngeredState, self).onUpdate(delta)
         self.timer -= delta
+        self.angerTime -= delta
         if self.timer <= 0:
+            self.onLeave()
+        elif self.angerTime <= 0:
             self.onLeave()
 
     """
