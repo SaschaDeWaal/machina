@@ -44,4 +44,3 @@ class DriveMotor:
             self.pwmA.ChangeFrequency(math.fabs(speed * 1000000))
             self.pwmB.ChangeFrequency(math.fabs(speed * 1000000))
             self.currentSpeed = speed
-            time.sleep(0.5)

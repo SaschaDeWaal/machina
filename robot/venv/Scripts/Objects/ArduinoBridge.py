@@ -65,8 +65,8 @@ class ArduinoBridge:
 
     def setTeamColour(self, number):
         if number == 0:
-            self.send('set color 1')
+            self.send('1')
         if number == 1:
-            self.send('set color 2')
+            self.send('2')
         if number == 2:
-            self.send('set color 3')
+            self.send('3')

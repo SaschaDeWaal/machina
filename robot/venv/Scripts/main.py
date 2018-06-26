@@ -17,7 +17,7 @@ behaviorManager.start()
 
 # wait on exit
 #raw_input("Press Enter to exit")
-time.sleep(20)
+time.sleep(120)
 print "stopped because there was a timer"
 
 #stop all threads
