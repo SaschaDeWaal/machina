@@ -9,6 +9,7 @@ class BaseState(object):
         self.robotData = None
         self.tempDel = 0
         self.deltaAccel = 0
+        self.deltaGyro = 0
         self.accel = [0,0,0]
         self.stateName = "BaseState"
 
@@ -17,6 +18,7 @@ class BaseState(object):
         self.robotData = robotData
         self.gyro = self.robotData.getGyro()
         self.accel = self.robotData.getAccel()
+        self.deltaGyro = 0
         self.tempDel = 0
         self.deltaAccel = 0
 
@@ -37,30 +39,43 @@ class BaseState(object):
     """
     def onUpdate(self, delta):
         """ Called every frame """
+
         randInt = random.randrange(1, 50, 1)
-        #print "gyroscope:" + ', '.join(str(f) for f in self.robotData.getGyro())
+        print "gyroscope:" + ', '.join(str(f) for f in self.robotData.getGyro())
         #print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel()) + "\n"
         if randInt == 42 and self.robotData.arousal > 6:
             self.goToState("AngeredState")
-        deltaGyro = self.CalcDeltaGyro()       # Take the difference between the current and previous values of the gyroscope
+        #deltaGyro = self.CalcDeltaGyro()       # Take the difference between the current and previous values of the gyroscope
+        #print "Self.gyro" + ', '.join(str(f) for f in self.gyro)
         self.tempDel += delta
         if self.tempDel > 0.5:
+            print self.stateName
+            #print "dA before: " + str(self.deltaAccel)
             #print "Self.accel" + ', '.join(str(f) for f in self.accel)
             #print "accelerometer" + ', '.join(str(f) for f in self.robotData.getAccel()) + "\n"
+            self.deltaGyro = self.CalcDeltaGyro()
             self.deltaAccel = self.CalcDeltaAccel()
+            print "dG: " + str(self.deltaGyro)
+            #print "Self.gyro" + ', '.join(str(f) for f in self.gyro)
+            #print "dA after: " + str(self.deltaAccel)
             #print "DeltaAccel: " + str(self.deltaAccel) + "\n"
-            if self.deltaAccel > 0.2:
+            #if self.deltaAccel > 0.3:
+            if self.deltaGyro > 15:
                 self.accel = self.robotData.getAccel()
+                self.gyro = self.robotData.getGyro()
                 self.goToState("ShakenState")
             self.deltaAccel = 0
+            #self.deltaGyro = 0
             self.tempDel = 0
             self.accel = self.robotData.getAccel()
+            self.gyro = self.robotData.getGyro()
             self.deltaAccel = self.CalcDeltaAccel()
+            self.deltaGyro = self.CalcDeltaGyro()
         #if self.deltaAccel > 0.1:
         #    self.deltaAccel = 0
             # go to beingShakenState, as it's being jostled
         #    self.goToState("ShakenState")
-        if self.accel[1] > 5:
+        if self.accel[1] > 50:
             # go to beingPetState, as it's being picked up
             self.goToState("BeingPetState")
         #self.accel = self.robotData.accel

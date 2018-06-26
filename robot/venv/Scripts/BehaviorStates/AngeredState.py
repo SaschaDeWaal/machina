@@ -3,7 +3,7 @@ Aggressive wander state, rapid acceleration
 Also 'challenges' other robots when coming across them
 """
 
-#import BaseState
+from BaseState import BaseState
 import time
 from DriveState import DriveState
 
@@ -23,7 +23,8 @@ class AngeredState(DriveState):
 
     def onLeave(self):
         super(AngeredState, self).onLeave()
-        super(AngeredState, self).goToState("BaseState")
+        #super(AngeredState, self).goToState("BaseState")
+        BaseState.goToState(self, "DriveState")
 
     def onUpdate(self, delta):
         super(AngeredState, self).onUpdate(delta)

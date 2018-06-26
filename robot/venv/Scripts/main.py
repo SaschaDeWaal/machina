@@ -9,6 +9,7 @@ import time
 leftMotor = DriveMotor(35, 37)
 rightMotor = DriveMotor(36, 38)
 arduinoBridge = ArduinoBridge()
+arduinoBridge.setTeamColour(0)
 RobotData = RobotData(leftMotor, rightMotor, arduinoBridge)
 behaviorManager = BehaviorManager(RobotData)
 

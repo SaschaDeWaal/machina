@@ -9,6 +9,7 @@ from BehaviorStates.BeingPetState import BeingPetState
 from BehaviorStates.ReturnToBaseState import ReturnToBaseState
 from BehaviorStates.RemoveSnowState import RemoveSnowState
 from BehaviorStates.AttackBaseState import AttackBaseState
+from BehaviorStates.DriveState import DriveState
 
 states = {
     "IdleState": IdleState,
@@ -18,7 +19,8 @@ states = {
     "BeingPetState": BeingPetState,
     "ReturnToBaseState": ReturnToBaseState,
     "RemoveSnowState": RemoveSnowState,
-    "AttackBaseState": AttackBaseState
+    "AttackBaseState": AttackBaseState,
+    "DriveState": DriveState
 }
 
 class BehaviorManager:
@@ -58,7 +60,7 @@ class BehaviorManager:
 
     def loop(self):
         while self.active:
-            delta = time.time() - self.lastTime;
+            delta = time.time() - self.lastTime
             self.lastTime = time.time()
 
             if self.currentState.nextBehavior is None:

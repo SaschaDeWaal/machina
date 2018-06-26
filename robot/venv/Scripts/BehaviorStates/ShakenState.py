@@ -11,19 +11,22 @@ class ShakenState(DriveState):
         self.timer = round(random.uniform(1, 4), 1)
         self.randNum = random.randrange(0, 7, 1)
         self.stateName = "ShakenState"
-        self.colourTimer = 1
+        self.colourTimer = 0.5
+        self.shakenTimer = 10
 
     def onEnter(self):
         super(ShakenState, self).onEnter()
         self.timer = round(random.uniform(1, 4), 1)
         self.randNum = random.randrange(0, 7, 1)
-        self.colourTimer = 1
+        self.colourTimer = 0.5
+        self.shakenTimer = 10
 
     def onLeave(self):
-        super(ShakenState, self).onLeave()
-        super(ShakenState, self).MotorBehaviour(0,0)
         teamCol = self.robotData.teamCol
         self.robotData.arduinoBridge.setTeamColour(teamCol)
+        super(ShakenState, self).MotorBehaviour(0,0)
+        super(ShakenState, self).onLeave()
+        BaseState.goToState(self, "DriveState")
 
     """
     Update function
@@ -33,11 +36,14 @@ class ShakenState(DriveState):
     """
     def onUpdate(self, delta):
         super(ShakenState, self).onUpdate(delta)
+        self.shakenTimer -= delta
+        if self.shakenTimer <= 0:
+            self.onLeave()
         self.timer -= delta
         self.colourTimer -= delta
         if self.colourTimer <= 0:
-            self.colourTimer = round(random.uniform(0.5,2), 1)
-            randCol = random.randrange(0, 6, 1)
+            self.colourTimer = round(random.uniform(0.25,1), 1)
+            randCol = random.randint(0,8)
             self.robotData.arduinoBridge.setTeamColour(randCol)
         if self.timer <= 0:
             self.timer = round(random.uniform(1,4), 1)
@@ -56,7 +62,7 @@ class ShakenState(DriveState):
         print "RandNum: " + str(self.randNum)
         #arMod = 800 * super(DriveState, self).robotData.arousal   # Modifier to motor power based on robot's arousal
         arMod = 800 * super(ShakenState, self).GetArousal()
-        timeMod = 10000 * delta
+        timeMod = 40000 * delta
         if self.randNum == 0:
             #super(ShakenState, self).MotorBehaviour(1000 + arMod, 1000 + arMod + timeMod)                  # used these initially
             #self.robotData.MotorBehaviour(1000 + arMod, 1000 + arMod + timeMod)

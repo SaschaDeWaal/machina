@@ -34,66 +34,66 @@ class ArduinoBridge:
         GPIO.output(12, True)
         time.sleep(1)
 
-    print "Waiting on first msg from the arduino (arduino needs to calibrate the sensors first)"
+        print "Waiting on first msg from the arduino (arduino needs to calibrate the sensors first)"
 
-    arduinoIsDone = False
-    while (arduinoIsDone == False):
-        data = self.ser.readline()
-        try:
-            if data[0] == "{":
-                self.lastData = json.loads(data)
-                arduinoIsDone = True
-        except:
-            pass
-
-    print "Connection is open"
-
-    self.open = True
-    self.thread = Thread(target=self.arduinoConnection, args=())
-    self.thread.start()
-
-
-def arduinoConnection(self):
-    while self.open:
-        try:
+        arduinoIsDone = False
+        while (arduinoIsDone == False):
             data = self.ser.readline()
-            print "receive from arduino: " + data
-            if data[0] == "{":
-                self.lastData = json.loads(data)
-        except:
-            pass
+            try:
+                if data[0] == "{":
+                    self.lastData = json.loads(data)
+                    arduinoIsDone = True
+            except:
+                pass
+
+        print "Connection is open"
+
+        self.open = True
+        self.thread = Thread(target=self.arduinoConnection, args=())
+        self.thread.start()
 
 
-def send(self, msg):
-    """ Send a command to the arduino """
-    if self.open:
-        self.ser.write(msg)
+    def arduinoConnection(self):
+        while self.open:
+            try:
+                data = self.ser.readline()
+                print "receive from arduino: " + data
+                if data[0] == "{":
+                    self.lastData = json.loads(data)
+            except:
+                pass
 
 
-def stop(self):
-    """ Close the serial connection to the arduino """
-    self.open = False
-    # GPIO.output(12, False)
-    # GPIO.output(12, False)
-    self.ser.close()
+    def send(self, msg):
+        """ Send a command to the arduino """
+        if self.open:
+            self.ser.write(msg)
 
 
-def setTeamColour(self, number):
-    if number == 0:
-        self.send('0')
-    if number == 1:
-        self.send('1')
-    if number == 2:
-        self.send('2')
-    if number == 3:
-        self.send('3')
-    if number == 4:
-        self.send('4')
-    if number == 5:
-        self.send('5')
-    if number == 6:
-        self.send('6')
-    if number == 7:
-        self.send('7')
-    if number == 8:
-        self.send('8')
+    def stop(self):
+        """ Close the serial connection to the arduino """
+        self.open = False
+        # GPIO.output(12, False)
+        # GPIO.output(12, False)
+        self.ser.close()
+
+
+    def setTeamColour(self, number):
+        if number == 0:
+            self.send('0')
+        if number == 1:
+            self.send('1')
+        if number == 2:
+            self.send('2')
+        if number == 3:
+            self.send('3')
+        if number == 4:
+            self.send('4')
+        if number == 5:
+            self.send('5')
+        if number == 6:
+            self.send('6')
+        if number == 7:
+            self.send('7')
+        if number == 8:
+            self.send('8')
