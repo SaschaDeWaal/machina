@@ -20,7 +20,7 @@ class RobotData:
         self.timer = 5
         self.light = [0,0,0]
         #self.teamCol = random.randint(0,2)
-        self.teamCol = 2
+        self.teamCol = 1
         self.arduinoBridge.setTeamColour(self.teamCol)
 
     # Setter for the arousal parameter.

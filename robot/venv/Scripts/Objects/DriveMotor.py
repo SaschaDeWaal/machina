@@ -18,6 +18,9 @@ class DriveMotor:
         GPIO.setup(pinA, GPIO.OUT)
         GPIO.setup(pinB, GPIO.OUT)
 
+        #GPIO.output(pinA, False)
+        #GPIO.output(pinB, False)
+
         self.pwmA = GPIO.PWM(pinA, 100)
         self.pwmB = GPIO.PWM(pinB, 100)
 
@@ -39,15 +42,21 @@ class DriveMotor:
         if speed == 0:
             self.pwmA.start(0)
             self.pwmB.start(0)
+            #GPIO.output(self.pinA, False)
+            #GPIO.output(self.pinB, False)
         else:
             if speed > 0:
                 self.pwmA.start(1)
                 self.pwmB.start(0)
+                #GPIO.output(self.pinA, True)
+                #GPIO.output(self.pinB, False)
             if speed < 0:
                 self.pwmA.start(0)
                 self.pwmB.start(1)
+                #GPIO.output(self.pinA, True)
+                #GPIO.output(self.pinB, False)
 
             self.pwmA.ChangeFrequency(math.fabs(speed * 1000000))
             self.pwmB.ChangeFrequency(math.fabs(speed * 1000000))
             self.currentSpeed = speed
-            time.sleep(0.5)
+            #time.sleep(0.5)
